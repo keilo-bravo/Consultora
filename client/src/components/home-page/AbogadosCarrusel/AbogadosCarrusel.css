@@ -1,0 +1,121 @@
+.container_carrusel_abogado {
+    width: 100%;
+}
+
+#contain_title_abogado {
+    padding            : 0;
+    margin             : 0;
+    /* background-color: #ccc; */
+    margin             : auto !important;
+    margin-top         : 70px !important;
+    width              : 89%;
+    border-top         : 1px solid #033663;
+    border-bottom      : 1px solid #033663;
+}
+
+
+.contain_abogado {
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    margin         : auto;
+    width          : 80% !important;
+    height         : 70vh;
+    padding        : 20px;
+    color          : #033663;
+}
+
+.abogado {
+    position: relative;
+    width   : 85% !important;
+}
+
+.abogado img {
+    display      : block;
+    height       : 116px;
+    width        : 110px;
+    margin       : auto;
+    object-fit   : cover;
+    border-radius: 50%;
+    box-shadow   : 2px 4px 5px 1px #0336639d;
+}
+
+.flex_h2_carrusel {
+    position: relative;
+}
+
+.flex_h2_carrusel h2 {
+    position   : absolute;
+    left       : 43%;
+    top        : 9%;
+    color      : #033663;
+    font-weight: bolder;
+
+}
+
+.img_abogado,
+.text_equipo,
+.button_ver_mas {
+    width: 100%;
+}
+
+.text_equipo {
+    margin-top: 7px;
+    text-align: center;
+}
+
+.text_equipo p:last-of-type {
+    font-weight: lighter;
+    font-style : italic;
+}
+
+.button_ver_mas {
+    width     : 80%;
+    margin    : auto;
+    margin-top: 10px;
+}
+
+
+.button_ver_mas a {
+    width           : 30%;
+    margin          : auto;
+    position        : relative;
+    display         : block;
+    text-align      : center;
+    border          : solid 1px #033663;
+    color           : #ccc;
+    background-color: #033663;
+    border-radius   : 3px;
+    padding         : 5px;
+    transition      : all 0.5s;
+}
+
+/* .button_ver_mas a::before {
+    
+} */
+
+.button_ver_mas a:hover {
+    color           : #033663;
+    background-color: #ccc;
+
+}
+
+.rec {
+    margin-top: 20px !important;
+    height    : 450px;
+}
+
+.rec.rec-arrow {
+    color           : #ccc;
+    background-color: #033663 !important;
+    transition      : all 0.4s;
+    padding         : 0px;
+    border-radius   : 0;
+}
+
+.rec-arrow:hover {
+    border-radius: 50%;
+    color        : #033663 !important;
+    background   : #ccc !important;
+    box-shadow   : inset 0 0 1px 1px #033663 !important;
+}

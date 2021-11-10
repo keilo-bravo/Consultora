@@ -1,0 +1,48 @@
+
+/* CONDICION INICIAL*/
+#container_load{
+    background-color: rgba(250, 240, 250, 0.616);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    transition: all 1s ease;
+    z-index: 10000;
+}
+
+#load{
+    border: 20px solid rgb(170, 169, 169);
+    border-top-color: #1208a1;
+    border-top-style: groove;
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    animation-name: loading;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes loading {
+    0%{transform: rotate(0deg);}
+    10%{transform: rotate(36deg);}
+    20%{transform: rotate(72deg);}
+    30%{transform: rotate(108deg);}
+    40%{transform: rotate(144deg);}
+    50%{
+        transform: rotate(180deg);
+        border-top-color:rgb(1, 195, 169);
+    }
+    60%{transform: rotate(216deg);}
+    70%{transform: rotate(252deg);}
+    80%{transform: rotate(288deg);}
+    90%{transform: rotate(324deg);}
+    100%{transform: rotate(360deg);}
+}

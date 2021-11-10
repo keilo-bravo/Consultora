@@ -1,0 +1,244 @@
+.footer_container {
+    margin-top: 40px;
+    width     : 100%;    
+    position  : relative;
+}
+
+.footer_container::after {
+    content              : "";
+    width                : 100%;
+    height               : 100%;
+    position             : absolute;
+    bottom               : 0;
+    left                 : 0;
+    filter               : blur(1px);
+    background-image     : linear-gradient(hsla(208, 94%, 20%, 0.473), hsla(208, 78%, 25%, 0.39), hsla(208, 62%, 42%, 0.425)), url('../assets/img/palacio-footer.jpg');
+    background-attachment: fixed;
+    background-position  : center center;
+    background-size      : cover;
+    z-index              : -2;
+}
+
+.footer {
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+     width          : 100%;
+}
+
+
+.footer h4 {
+    font-size: 30px;
+}
+
+.footer .footer_contain {
+    width     : 50%;
+    height    : 538px;
+    text-align: center;
+}
+
+.footer .footer_contain * {
+    line-height: 33px;
+    color      : white;
+}
+
+.footer .footer_contain .footer_contain_text {
+    margin-top: -17px;
+
+}
+
+.footer .footer_contain img {
+    width     : 40%;
+    text-align: center;
+}
+
+.footer .footer_contain .footer_contain_text p {
+    max-width: 61%;
+    position : relative;
+    left     : 135px;
+}
+
+
+
+.footer .footer_contain .iconos {
+    display        : flex;
+    justify-content: space-evenly;
+    width          : 64%;
+    max-height     : 74px;
+    transform      : translate(130px, 10px);
+}
+
+.footer .footer_contain .iconos svg {
+    display   : block;
+    width     : 11%;
+    max-height: 38px;
+}
+
+.footer .footer_contain .iconos svg:nth-child(1) {
+    display      : block;
+    width        : 11%;
+    /* transform : translate(42px, 14px); */
+    transform    : translate(42px, 1px);
+    max-height   : 38px;
+}
+
+.footer .footer_contain .iconos svg:nth-child(2) {
+    display      : block;
+    width        : 11%;
+    /* transform : translate(-50px, 14px); */
+    transform    : translate(-50px, 1px);
+    max-height   : 38px;
+}
+
+.footer .footer_contain .button_footer {
+    width: 100%;
+}
+
+.footer .footer_contain .button_footer a {
+    display         : block;
+    position        : relative;
+    right           : -207px;
+    width           : 40%;
+    padding         : 10px;
+    /* border       : white solid 1px; */
+    background-color: #033663;
+    font-size       : 20px;
+    transition      : .4s ease-out;
+    border          : 1px solid transparent;
+    color           : white;
+}
+
+.footer .footer_contain .button_footer a::before {
+    content               : '';
+    position              : absolute;
+    bottom                : 0;
+    left                  : 0;
+    width                 : 100%;
+    height                : 100%;
+    transform-origin      : left 0;
+    transform             : scaleX(0);
+    z-index               : -1;
+    transition            : 0.4s ease-out;
+    background-color      : white;
+    backface-visibility   : hidden;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.footer .footer_contain .button_footer a:hover {
+    color    : #033663;
+    border   : 1px solid white;
+    z-index  : 1;
+    transform: translateZ(0);
+}
+
+.footer .footer_contain .button_footer a:hover::before {
+    transform: scaleX(1);
+}
+
+.text_alig {
+    width: 100%;
+}
+
+.text_alig * {
+    color: white;
+}
+
+.text_alig .footer_info {
+    position       : relative;
+    width          : 89%;
+    margin         : auto;
+    display        : flex;
+    justify-content: space-between;
+    padding-top    : 20px;
+}
+
+.text_alig .footer_info::after {
+    content         : "";
+    position        : absolute;
+    bottom          : 0;
+    width           : 100%;
+    height          : 1px;
+    background-color: #ccc;
+}
+
+.text_alig .footer_info div {
+    font-size: 10px;
+}
+
+.text_alig .footer_info div:nth-child(1) {
+    text-align: left;
+    max-width : 413px;
+}
+
+.text_alig .footer_info div:nth-child(2) {
+    text-align: right;
+    max-width : 413px;
+}
+
+.flex_derecho_autor {
+    position       : relative;
+    width          : 100%;
+    display        : flex;
+    justify-content: center;
+    margin-top     : 10px;
+}
+
+.flex_derecho_autor div {
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    font-size      : 12px;
+}
+
+.flex_derecho_autor div img:nth-child(1) {
+    position: absolute;
+    bottom  : 7%;
+    right   : 60%;
+    width   : 3%;
+}
+
+.flex_derecho_autor div img:nth-child(3) {
+    position: absolute;
+    bottom  : 7%;
+    left    : 60%;
+    width   : 3%;
+}
+
+
+@media (min-width: 1592px) and (max-width: 1920px) {
+    .footer {
+        width : 100%;
+        margin: auto;
+    }
+    .footer .footer_contain .footer_contain_text p {
+        left     : 221px;
+        font-size: 20px;
+        max-width: 54%;
+    }
+
+    .footer .footer_contain .button_footer a {
+        right: -286px;
+        width: 40%;
+    }
+
+    .footer .footer_contain .iconos {
+        transform: translate(178px, 10px);
+    }
+
+    .text_alig .footer_info div {
+        font-size: 12px;
+    }
+
+    .text_alig {
+        position: relative;
+        z-index : -1;
+    }
+
+    .flex_derecho_autor {
+        margin-top: 23px;
+    }
+
+    .flex_derecho_autor div {
+        font-size: 13px;
+    }
+}

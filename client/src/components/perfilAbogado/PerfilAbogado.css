@@ -1,0 +1,9 @@
+.color-titulo {
+    color: #033663;
+}
+
+.imagen-perfil-abogado {
+    width: 450px; 
+    height: 300px;
+    object-fit: cover;
+}

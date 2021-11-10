@@ -1,0 +1,63 @@
+/******************* Banner left  ****************/
+
+.contenedor_banner_diagonal {
+    position          : relative;
+    width             : 100%;
+    height            : 90vh;
+    display           : flex;
+    justify-content   : center;
+    align-items       : center;
+    margin-top        : 40px;
+    color             : #ccc;
+    overflow       : hidden;
+}
+
+.contenedor_banner_diagonal .banner_diagonal_left {
+    width           : 200vw;
+    position        : relative;
+    height          : 70vh;
+    background-color: #033663;
+    position        : absolute;
+    transform       : rotate(3.5deg);
+}
+
+.banner_diagonal_left .banner_contain_left {
+    max-width: 100%;
+}
+
+.banner_contain_left .banner_content_left {
+    max-width : 20%;
+    position  : absolute;
+    transform : rotate(-3.5deg);
+    text-align: left;
+    left      : 30%;
+    top       : 21%;
+}
+
+.banner_contain_left .banner_content_left .text_banner_title {
+    display        : flex;
+    justify-content: center;
+    text-align     : center;
+    transform      : translate(52%, -64%);
+}
+
+.banner_content_left .card_flex {
+    width          : 200%;
+    display        : flex;
+    justify-content: space-evenly;
+}
+
+.card_flex img {
+    width           : 300px;
+    height          : 256px;
+    background-color: black;
+    margin-right    : 10px;
+    object-fit      : cover;
+}
+
+
+
+
+
+
+/******************* Banner right  ****************/

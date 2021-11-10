@@ -1,0 +1,33 @@
+* {
+  margin                : 0px;
+  padding               : 0px;
+  box-sizing            : border-box;
+  list-style            : none;
+  font-family           : 'Playfair Display', serif;
+  backface-visibility   : hidden;
+  -webkit-font-smoothing: auto;
+}
+
+a:focus,
+a:visited,
+a:link {
+  box-shadow: none !important;
+  border    : none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* #root {
+  min-height: 2000px;
+} */
+
+.textDecoration {
+  text-decoration: none;
+  list-style     : none;
+}
+
+.App {
+  padding: 0px;
+}

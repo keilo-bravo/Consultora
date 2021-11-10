@@ -1,0 +1,30 @@
+.pointer {
+    cursor: pointer;
+}
+
+.imagen-cambiar-abogado {
+    transition: 0.2s;
+    z-index: 5000;
+}
+.imagen-cambiar-abogado:hover {
+    opacity: 0.85;
+    /* z-index: 10000000; */
+}
+
+.container-imagen-boton:hover .boton-eliminar-imagen {
+    display: block !important;
+    z-index: 50001;
+}
+.container-imagen-boton:hover .imagen-cambiar-abogado:hover {
+    z-index: 0;
+}
+
+.boton-eliminar-imagen {
+    z-index: 1;
+    display: none !important;
+}
+.boton-eliminar-imagen:hover {
+    z-index: 9999999999999999 !important;
+    display: block !important;
+
+}

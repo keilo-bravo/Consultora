@@ -1,0 +1,3 @@
+.botones-paginador> li> button:disabled{
+    color: gray;
+}

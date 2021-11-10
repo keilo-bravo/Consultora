@@ -1,0 +1,88 @@
+.banner_contain {
+    position       : relative;
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    min-height     : 80vh;
+    width          : 100%;
+    color          : #fff;
+    overflow       : hidden;
+}
+
+.banner_contain::after {
+    position             : absolute;
+    content              : "";
+    width                : 100%;
+    height               : 100%;
+    left                 : 0;
+    bottom               : 0;
+    background-image     : linear-gradient(hsla(208, 94%, 20%, 0.473), hsla(208, 78%, 25%, 0.39), hsla(208, 62%, 42%, 0.425)), url('../assets/img/sean-pollock-PhYq704ffdA-unsplash.jpg');
+    background-position  : center center;
+    background-size      : cover;
+    background-attachment: fixed;
+    z-index              : -1;
+    filter               : blur(1px);
+}
+
+.banner_contain h4 {
+    text-align   : center;
+    margin-bottom: 32px;
+    font-size    : 35px;
+    font-weight  : 400;
+}
+
+.banner_contain .personUl ul * {
+    line-height: 38px;
+    font-size  : 18px;
+    font-weight: 400;
+}
+
+.banner_contain .personUl {
+    position: relative;
+}
+
+.banner_contain .personUl img {
+    position  : absolute;
+    width     : 9%;
+    left      : 44%;
+    bottom    : -27%;
+    object-fit: cover;
+
+
+}
+
+.banner_contain .personUl ul li {
+    list-style: square;
+}
+
+@media (min-width: 1592px) and (max-width: 1920px) {
+    .banner_contain div {
+        position: relative;
+        bottom  : 27px;
+    }
+
+    .banner_contain  h4 {
+        font-size    : 47px;
+        margin-bottom: 40px;
+    }
+
+    .banner_contain .personUl {
+        margin-top: 70px;
+    }
+
+    .banner_contain .personUl ul * {
+        line-height: 55px;
+        font-size  : 23px;
+        font-weight: 400;
+    }
+
+    .banner_contain .personUl img {
+        margin-top: 70px;
+        object-fit: cover;
+    }
+
+    .banner_contain .personUl img {
+        width: 8%;
+        bottom: -35%;
+    }
+}

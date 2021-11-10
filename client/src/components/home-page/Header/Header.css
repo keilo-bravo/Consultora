@@ -1,0 +1,309 @@
+.bg-blue {
+    background-image: linear-gradient(to bottom,
+            #033663,
+            #0e4475,
+            #175288,
+            #20619b,
+            #2870af);
+}
+
+.opacity_carru {
+    opacity: 0.8;
+}
+
+.height_image {
+    object-fit: contain;
+}
+
+.height_image img {
+    object-fit: cover;
+    height    : 86vh;
+}
+
+.m_top_header {
+    top: 200px;
+}
+
+.bg_one_caption .caption_one {
+    top         : 43%;
+}
+
+.bg_one_caption .caption_one img {
+    width     : 38%;
+    height    : 110%;
+    text-align: center;
+    position  : absolute;
+    bottom    : 74%;
+    left      : 32.5%;
+}
+
+.bg_one_caption {
+    min-height         : 86vh !important;
+    background-image   : linear-gradient(hsla(208, 83%, 47%, 0.164), hsla(208, 89%, 45%, 0.178), hsla(208, 95%, 77%, 0.1)), url("../assets/img/pexels-cytonn-photography-955395.jpg") !important;
+    background-repeat  : no-repeat;
+    background-size    : cover;
+    background-position: center center !important;
+    transform          : translate(50%);
+    object-fit         : cover;
+}
+
+.bg_one_caption .caption_one h5 {
+    font-weight: 400;
+    font-size  : 50px;
+}
+
+.bg_one_caption .caption_one p {
+    font-size  : 25px;
+    font-weight: 800;
+}
+
+.bg_two_caption {
+    min-height         : 86vh !important;
+    background-image   : linear-gradient(hsla(208, 94%, 20%, 0.4), hsla(208, 78%, 25%, 0.4), hsla(208, 62%, 42%, 0.3)), url("../assets/img/Balanza-de-la-justicia.jpg") !important;
+    background-repeat  : no-repeat;
+    background-size    : cover;
+    background-position: center center;
+    object-fit         : cover;
+}
+
+.bg_two_caption .caption_two {
+    height   : 72% !important;
+    left     : 20% !important;
+    top      : 10%;
+    width    : 35% !important;
+    overflow : hidden;
+    transform: scale(1.1);
+}
+
+
+.bg_two_caption .caption_two h5 {
+    position   : relative;
+    left       : 10%;
+    text-align : left;
+    font-weight: 400;
+    font-size  : 52px;
+    max-width  : 88%;
+    font-size  : 62px;
+    line-height: 80px;
+}
+
+
+.bg_two_caption .caption_two a {
+    position                  : relative;
+    left                      : 10%;
+    display                   : block;
+    width                     : 40%;
+    text-decoration           : none;
+    color                     : white;
+    text-align                : center;
+    font-weight               : 400;
+    font-size                 : 25px;
+    border                    : solid 1px #033663;
+    border-top-left-radius    : 7px;
+    border-bottom-right-radius: 7px;
+    padding                   : 4px;
+    margin-top                : 13px;
+    transition                : all 0.5s;
+}
+
+.bg_two_caption .caption_two a:hover {
+    color : #033663;
+    border: solid 1px #033663;
+}
+
+.bg_two_caption .caption_two a::before {
+    content         : '';
+    position        : absolute;
+    bottom          : 0px;
+    left            : 0;
+    display         : block;
+    width           : 100%;
+    height          : 100%;
+    background-color: #fff;
+    transform       : scaleY(0);
+    transform-origin: 0 bottom 0;
+    transition      : 0.4s ease-out;
+    padding         : 4px;
+    z-index         : -1;
+}
+
+.bg_two_caption .caption_two a:hover:before {
+    transform                 : scaleY(1);
+    border                    : solid 1px #033663;
+    border-top-left-radius    : 7px;
+    border-bottom-right-radius: 7px;
+}
+
+
+
+.bg_three_caption {
+    position  : relative;
+    width     : 100%;
+    min-height: 86vh !important;
+    top       : 0;
+    left      : 0;
+}
+
+.bg_three_caption:before {
+    position           : absolute;
+    left               : 0;
+    bottom             : 0;
+    content            : "";
+    width              : 100%;
+    min-height         : 86vh !important;
+    display            : block;
+    background-image   : linear-gradient(to left, #03366371, #012f586e, #012a4e62, #0125436c, #011f3970), url("../assets/img/equipo-abogados.jpg") !important;
+    background-repeat  : no-repeat;
+    background-size    : cover;
+    background-position: center top;
+    filter             : blur(1px);
+    z-index            : -1;
+}
+
+.bg_three_caption .caption_three {
+    position  : absolute;
+    left      : 18%;
+    top       : 13%;
+    max-width : 65%;
+    overflow  : hidden;
+    text-align: center;
+}
+
+.bg_three_caption .caption_three * {
+    line-height: 1.3;
+}
+
+.bg_three_caption .caption_three h5 {
+    font-weight: 400;
+    font-size  : 50px;
+    margin     : auto;
+}
+
+.bg_three_caption .caption_three h5:last-of-type {
+    display      : inline-block;
+    padding      : 10px;
+    font-weight  : 800;
+    font-size    : 50px;
+    color        : #0565b9;
+    margin-bottom: 30px;
+}
+
+.bg_three_caption .caption_three h5:last-of-type::after {
+    content         : '';
+    width           : 200px;
+    height          : 2px;
+    display         : block;
+    background-color: #0565b9;
+}
+
+.bg_three_caption .caption_three a {
+    position   : relative;
+    display    : block;
+    margin     : auto;
+    width      : 30%;
+    color      : white;
+    font-weight: 800;
+    font-size  : 30px;
+    border     : solid 1px #033663;
+    z-index    : 1;
+    transition : all 0.4s ease-out;
+}
+
+.bg_three_caption .caption_three a:hover {
+    color: #033663;
+}
+
+.bg_three_caption .caption_three a::before {
+    content         : '';
+    position        : absolute;
+    bottom          : 0px;
+    left            : 0;
+    display         : block;
+    width           : 100%;
+    height          : 100%;
+    background-color: #ccc;
+    transform       : scaleY(0);
+    transform-origin: 0 bottom 0;
+    transition      : 0.4s ease-out;
+    z-index         : -1;
+    border          : solid 1px transparent;
+}
+
+.bg_three_caption .caption_three a:hover:before {
+    transform                 : scaleY(1);
+    border                    : solid 1px #033663;
+    border-top-left-radius    : 7px;
+    border-bottom-right-radius: 7px;
+}
+
+.color_pn {
+    background-color: #033663;
+    border-radius   : 20px;
+    padding         : 5px;
+}
+
+.color_pn span {
+    display: block;
+}
+
+/* -------------------Medias Query------------------- */
+
+
+@media (min-width: 1592px) and (max-width: 1920px) {
+    .bg_one_caption .caption_one {
+        top         : 50%;
+        /* left     : 20%; */
+        /* position : relative; */
+        transform   : scale(1.3);
+    }
+
+    .bg_one_caption .caption_one img {
+        width     : 33%;
+        height    : 100%;
+        text-align: center;
+        position  : absolute;
+        bottom    : 78%;
+        left      : 35.1%;
+    }
+
+    .bg_two_caption .caption_two {
+        height   : 72% !important;
+        left     : 28% !important;
+        top      : 30%;
+        width    : 35% !important;
+        overflow : hidden;
+        transform: scale(1.5);
+    }
+
+
+    .bg_two_caption .caption_two h5 {
+        position   : relative;
+        left       : 10%;
+        text-align : left;
+        font-weight: 400;
+        font-size  : 52px;
+        max-width  : 55%;
+    }
+
+    .bg_two_caption .caption_two a {
+        position: relative;
+        left    : 10%;
+        display : block;
+        width   : 29%;
+    }
+
+    .bg_three_caption .caption_three {
+        position : absolute !important;
+        left     : 18.5% !important;
+        top      : 30% !important;
+        transform: scale(1.4);
+    }
+
+    .bg_three_caption .caption_three a {
+        width: 24%;
+    }
+
+    .caption_three h5 {
+        max-width: 888px;
+    }
+}

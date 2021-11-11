@@ -96,7 +96,7 @@ export const Signin = () => {
           dni: dni,
           lastName: lastName,
           celular: celular,
-          password: md5(password),
+          password: password,
         })
       )
         .then(() => {

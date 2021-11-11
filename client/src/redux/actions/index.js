@@ -4,7 +4,7 @@ import swal from "sweetalert";
 export function getMaterias() {
   return async function (dispatch) {
     try {
-      const json = await axios.get("/materias");
+      const json = await axios.get("https://caonsultora-pg.herokuapp.com/materias");
       return dispatch({
         type: "GET_MATERIAS",
         payload: json.data,
@@ -18,7 +18,7 @@ export function getMaterias() {
 export function getAbogados() {
   return async function (dispatch) {
     try {
-      const json = await axios.get("/abogados");
+      const json = await axios.get("https://caonsultora-pg.herokuapp.com/abogados");
       return dispatch({
         type: "GET_ABOGADOS",
         payload: json.data,
@@ -32,7 +32,7 @@ export function getAbogados() {
 export function getProvincias() {
   return async function (dispatch) {
     try {
-      const json = await axios.get("/provincias");
+      const json = await axios.get("https://caonsultora-pg.herokuapp.com/provincias");
       return dispatch({
         type: "GET_PROVINCIAS",
         payload: json.data,
@@ -46,7 +46,7 @@ export function getProvincias() {
 export function getUsuarios() {
   return async function (dispatch) {
     try {
-      const json = await axios.get("/usuarios");
+      const json = await axios.get("https://caonsultora-pg.herokuapp.com/usuarios");
       return dispatch({
         type: "GET_USUARIOS",
         payload: json.data,
@@ -62,7 +62,7 @@ export function getUsuarios() {
 export function getCasos() {
   return async function (dispatch) {
     try {
-      const json = await axios.get("/casos");
+      const json = await axios.get("https://caonsultora-pg.herokuapp.com/casos");
       return dispatch({
         type: "GET_CASOS",
         payload: json.data,
@@ -76,7 +76,7 @@ export function getCasos() {
 export function postCasos(payload) {
   return async function () {
     try {
-      const newCaso = await axios.post("/casos/new", payload);
+      const newCaso = await axios.post("https://caonsultora-pg.herokuapp.com/casos/new", payload);
       return newCaso;
     } catch (error) {
       console.log(error)
@@ -87,7 +87,7 @@ export function postCasos(payload) {
 export function postUsuario(usuario) {
   return async function (dispatch) {
     try {
-      await axios.post("/usuario", usuario);
+      await axios.post("https://caonsultora-pg.herokuapp.com/usuario", usuario);
 
       return dispatch({
         type: "POST_USUARIO",
@@ -109,7 +109,7 @@ export const setUsuario = (usuario) => {
 
 export const getUsuario = (usuario) => {
   return (dispatch) => {
-    axios.put("/usuario", usuario)
+    axios.put("https://caonsultora-pg.herokuapp.com/usuario", usuario)
       .then(user => {
         console.log(user);
         localStorage.setItem('username', user.data.firstName)
@@ -131,7 +131,7 @@ export const getUsuario = (usuario) => {
 export function postAbogado(abogado) {
   return async function (dispatch) {
     try {
-      await axios.post("/usuario/abogado", abogado);
+      await axios.post("https://caonsultora-pg.herokuapp.com/usuario/abogado", abogado);
       return dispatch({
         type: "POST_ABOGADO",
       });
@@ -144,7 +144,7 @@ export function postAbogado(abogado) {
 export function getAbogado(abogado) {
   return async function (dispatch) {
     try {
-      const aux = await axios.put("/abogado", abogado);
+      const aux = await axios.put("https://caonsultora-pg.herokuapp.com/abogado", abogado);
       return dispatch({
         type: "GET_ABOGADO",
         payload: aux.data,
@@ -159,7 +159,7 @@ export function getAbogado(abogado) {
 export function postConsulta(consulta) {
   return async function (dispatch) {
     try {
-      await axios.post("/consultas", consulta);
+      await axios.post("https://caonsultora-pg.herokuapp.com/consultas", consulta);
       return dispatch({
         type: "POST_CONSULTA",
       });
@@ -172,7 +172,7 @@ export function postConsulta(consulta) {
 export function setConsulta(consultaId, abogadoId, respuesta) {
   return async function (dispatch) {
     try {
-      await axios.put("/consultas", { consultaId, abogadoId, respuesta });
+      await axios.put("https://caonsultora-pg.herokuapp.com/consultas", { consultaId, abogadoId, respuesta });
       swal("La consulta fue aceptada", {
         icon: "success",
       });
@@ -200,7 +200,7 @@ export const mostrarConsulta = (consulta) => {
 export function setAbogado(user) {
   return async function (dispatch) {
     try {
-      await axios.post("/usuario/abogado", user);
+      await axios.post("https://caonsultora-pg.herokuapp.com/usuario/abogado", user);
       return dispatch({
         type: "SET_ABOGADO"
       });
@@ -212,7 +212,7 @@ export function setAbogado(user) {
 export function setAdmin(user) {
   return async function (dispatch) {
     try {
-      await axios.post("/adm", user);
+      await axios.post("https://caonsultora-pg.herokuapp.com/adm", user);
       return dispatch({
         type: "SET_ADMIN"
       });
@@ -224,7 +224,7 @@ export function setAdmin(user) {
 export function setBann(user) {
   return async function (dispatch) {
     try {
-      await axios.put("/bann", user);
+      await axios.put("https://caonsultora-pg.herokuapp.com/bann", user);
       return dispatch({
         type: "SET_BANN"
       });
@@ -236,7 +236,7 @@ export function setBann(user) {
 export function getConsultas() {
   return async function (dispatch) {
     try {
-      const json = await axios.get("/consultas");
+      const json = await axios.get("https://caonsultora-pg.herokuapp.com/consultas");
       return dispatch({
         type: "GET_CONSULTAS",
         payload: json.data,
@@ -251,7 +251,7 @@ export function getConsultas() {
 export function getPersonas() {
   return async function (dispatch) {
     try {
-      const json = await axios.get("/personas");
+      const json = await axios.get("https://caonsultora-pg.herokuapp.com/personas");
       return dispatch({
         type: "GET_PERSONAS",
         payload: json.data,
@@ -286,7 +286,7 @@ export function filtrarProvincias(payload) {
 export function putCaso(caso) {
   return async function (dispatch) {
     try {
-      await axios.put("/casos/put", caso);
+      await axios.put("https://caonsultora-pg.herokuapp.com/casos/put", caso);
       return dispatch({
         type: "PUT_CASO",
       });
@@ -297,7 +297,7 @@ export function putCaso(caso) {
 }
 export const postTickets = (Ticket) => {
   return (dispatch) => {
-    axios.post("/tickets/new", Ticket)
+    axios.post("https://caonsultora-pg.herokuapp.com/tickets/new", Ticket)
       .then(response => {
         return dispatch({ type: "POST_TICKET" });
       })
@@ -309,7 +309,7 @@ export const postTickets = (Ticket) => {
 }
 export function getTickets(id) {
   return (dispatch) => {
-    axios.get("/tickets", id)
+    axios.get("https://caonsultora-pg.herokuapp.com/tickets", id)
       .then(tickets => {
         return dispatch({
           type: "GET_TICKET",
@@ -323,7 +323,7 @@ export function getTickets(id) {
 }
 export function modificarTicket(Ticket) {
   return (dispatch) => {
-    axios.put("/tickets/edit", Ticket)
+    axios.put("https://caonsultora-pg.herokuapp.com/tickets/edit", Ticket)
       .then(response => {
         return dispatch({ type: "PUT_TICKET" });
       })

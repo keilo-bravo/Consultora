@@ -41,7 +41,7 @@ export const Signup = () => {
       await createUserWithEmailAndPassword(auth, eMail, md5(password))
         .then(() => {
           console.log("no rompio");
-          dispatch(postUsuario({ eMail: eMail, firstName: firstName, dni: dni, lastName: lastName, celular: celular, password: md5(password) }))
+          dispatch(postUsuario({ eMail: eMail, firstName: firstName, dni: dni, lastName: lastName, celular: celular, password: password }))
 
           createOK()
 

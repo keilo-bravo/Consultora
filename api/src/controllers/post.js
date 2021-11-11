@@ -1,6 +1,7 @@
 const { uuid } = require("uuidv4");
 const cloudinary = require("../config/cloudinary");
 const enviarEmail = require("../email/email");
+const axios = require("axios");
 const mercadopago = require("../config/MercadoPago");
 const bodyParser = require("body-parser");
 
@@ -87,7 +88,7 @@ const postPago = async (req, res, next) => {
   const MPInfo = req.body
 
   try {
-    console.log("id a guscar --------------------------------------",MPInfo.data.id);
+    console.log("id a Buscar --------------------------------------",MPInfo.data.id);
     console.log("  --------------------------------------");
     const mpApi = (await axios.get(`https://api.mercadopago.com/v1/payments/${MPInfo.data.id}?access_token=${process.env.MERCADOPAGO_API_PROD_ACCESS_TOKEN}`)).data
 

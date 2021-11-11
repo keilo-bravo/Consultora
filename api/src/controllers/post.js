@@ -105,14 +105,6 @@ const postPago = async (req, res, next) => {
       ]);
       console.log("new tikete -------------", ticket);
       res.sendStatus(200);
-      return res.send({
-        ...{
-          estatus: mpApi.status,
-          detalle_estatus: mpApi.status_detail,
-          medioDePago: mpApi.payment_type_id
-        },
-        ticket,
-      })
     }
 
       res.sendStatus(201);

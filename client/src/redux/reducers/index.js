@@ -161,7 +161,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         ticket: action.payload,
-      };
+      }; 
     default:
       return state;
   }

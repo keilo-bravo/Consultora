@@ -36,7 +36,7 @@ export default function ConsultasUsuario() {
 
     return (<>
 
-        <UsuarioNavBar></UsuarioNavBar>
+        <UsuarioNavBar/>
 
         <div className="container mt-5">
 
@@ -100,12 +100,6 @@ export default function ConsultasUsuario() {
                                             <td className="text-success">La consulta fue abonada</td>
                                 }
 
-                                {
-                                    <td>
-                                        <input type="number" min="0" name="n_operacion" autoComplete="off" placeholder="1111111111" className="form-control" required onChange={(e) => { setN_Operacion(e.target.value) }} />
-                                        <button disabled={consulta?.ticket?.estatus !== 'pending'} onClick={() => { efectuarPago(consulta.ticket?.enlace, n_operacion) }} className={`btn btn-${consulta.ticket?.estatus === 'pending' ? 'success' : 'light text-muted'}`}>Notificar</button>
-                                    </td>
-                                }
                             </tr>
 
 

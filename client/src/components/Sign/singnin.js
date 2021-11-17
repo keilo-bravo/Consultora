@@ -8,8 +8,6 @@ import {
   signOut,
   setPersistence,
   browserSessionPersistence,
-  inMemoryPersistence,
-  signInWithRedirect,
 } from "firebase/auth";
 import Logo from "../home-page/assets/img/buffet-buffet-law.png";
 import {
@@ -17,6 +15,7 @@ import {
   postUsuario,
   getPersonas,
   getUsuarios,
+  modificarClave
 } from "../../redux/actions";
 import {
   sessionERR,
@@ -129,16 +128,18 @@ export const Signin = () => {
   const Login = async () => {
     await setPersistence(auth, browserSessionPersistence)
       .then(async () => {
-        await signInWithEmailAndPassword(auth, eMail, md5(password))
+        await signInWithEmailAndPassword(auth, eMail, password)
           .then((userCredential) => {
             // Signed in
             console.log("login");
             const user = userCredential.user;
-            dispatch(getUsuario({ eMail: eMail }));
-            sessionIN();
-            setEmail("");
-            setPassword("");
-            // ...
+            dispatch(modificarClave({eMail: eMail, password: md5(password)}))
+            .then(()=>{
+              dispatch(getUsuario({ eMail: eMail }));
+              sessionIN();
+              setEmail("");
+              setPassword("");
+            })
           })
           .catch((error) => {
             console.log("error");

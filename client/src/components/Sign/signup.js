@@ -38,7 +38,7 @@ export const Signup = () => {
       usuarios.some(e => e.eMail.toString() === eMail.toString()) ? correoNoOK() : dniNoOK()
     }
     else {
-      await createUserWithEmailAndPassword(auth, eMail, md5(password))
+      await createUserWithEmailAndPassword(auth, eMail, password)
         .then(() => {
           console.log("no rompio");
           dispatch(postUsuario({ eMail: eMail, firstName: firstName, dni: dni, lastName: lastName, celular: celular, password: password }))

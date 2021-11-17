@@ -88,8 +88,6 @@ const postPago = async (req, res, next) => {
   const MPInfo = req.body
 
   try {
-    console.log("id a Buscar --------------------------------------",MPInfo.data.id);
-    console.log("  --------------------------------------");
     const mpApi = (await axios.get(`https://api.mercadopago.com/v1/payments/${MPInfo.data.id}?access_token=${process.env.MERCADOPAGO_API_PROD_ACCESS_TOKEN}`)).data
 
     const ticket = await Ticket.findOne({ where: { titulo: mpApi.description } });
@@ -103,7 +101,6 @@ const postPago = async (req, res, next) => {
       Promise.all([
         await ticket.save(),
       ]);
-      console.log("new tikete -------------", ticket);
       res.sendStatus(200);
     }
 
@@ -395,8 +392,23 @@ async function setAdmin(req, res) {
   }
 }
 
-async function reiniciarPassword(req, res) {
 
+async function reiniciarPassword(req, res) {
+  const { eMail, password } = req.body;
+
+  try {
+    const thisUsers = await Usuario.findOne({where:{eMail:eMail}});
+    
+    if (thisUsers.eMail != undefined) {
+      thisUsers.password = password;
+
+      Promise.all([await thisUsers.save()]);
+      res.sendStatus(200);
+    }
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
 }
 
 module.exports = {

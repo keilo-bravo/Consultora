@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -10,7 +10,6 @@ import { Provider } from "react-redux";
 import store from "./redux/store/store";
 import { FirebaseAppProvider } from 'reactfire'
 import firebaseConfig from './firebase';
-import Loaded from './components/Loaded/Loaded';
 import axios from 'axios';
 
 
@@ -22,10 +21,8 @@ ReactDOM.render(
     <Provider store={store}>
       <Router>
         <FirebaseAppProvider firebaseConfig={firebaseConfig}>
-          <Suspense fallback={Loaded}>
-            <App />
-          </Suspense>
-          </FirebaseAppProvider>
+          <App />
+        </FirebaseAppProvider>
       </Router>
     </Provider>
   </React.StrictMode>,

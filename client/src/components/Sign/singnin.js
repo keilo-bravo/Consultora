@@ -133,7 +133,7 @@ export const Signin = () => {
             // Signed in
             console.log("login");
             const user = userCredential.user;
-            dispatch(modificarClave({eMail: eMail, password: md5(password)}))
+            dispatch(modificarClave({eMail: eMail, password: password}))
             .then(()=>{
               dispatch(getUsuario({ eMail: eMail }));
               sessionIN();

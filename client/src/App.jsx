@@ -57,31 +57,33 @@ function App() {
         <Route exact path="/abogados">
           <Perfiles />
         </Route>
-        <Route exact path={!(usuario?.adminId) ?"/admin": "/ingreso"} component={!(usuario?.adminId) ?AdminPage: Signin}></Route>
+        <Route exact path={usuario?.adminId!=null ? "/admin": "/ingreso"} component={usuario?.adminId !=null ? AdminPage: Signin}></Route>
 
         <Route  exact path="/ingreso" component={Signin} />
         <Route exact path="/cita" component={FormCita} />
         <Route exact path="/Cambiopass" component={NewPass} />
-        <Route exact path={!(usuario?.clienteId) ?"/user/panel": "/ingreso"}>
-          {!(usuario?.clienteId) ?<HomeUsuario />:<Signin/>}
+        <Route exact path={
+          (usuario) ?"/user/panel": "/ingreso"}>
+          {usuario  ? <HomeUsuario />:<Signin/>}
+          //kotoc48625@healteas.com
         </Route>
-        <Route exact path={!(usuario?.clienteId) ?"/user/panel/consultas": "/ingreso"}>
-        {!(usuario?.clienteId) ? <ConsultasUsuario/>:<Signin/>}
+        <Route exact path={usuario?.clienteId!=null ?"/user/panel/consultas": "/ingreso"}>
+        {usuario?.clienteId!=null ? <ConsultasUsuario/>:<Signin/>}
         </Route>
         <div>
           <NavAbogado />
-          <Route exact path={!(usuario?.abogadoId) ?"/user/abogado": "/ingreso"}>
-          {!(usuario?.abogadoId) ? <HomeAbogado />:<Signin/>}
+          <Route exact path={usuario?.abogadoId!=null ?"/user/abogado": "/ingreso"}>
+          {usuario?.abogadoId!=null ? <HomeAbogado />:<Signin/>}
           </Route>
-          <Route exact path={(!usuario?.abogadoId) ?"/user/abogado/clientes": "/ingreso"}>
-          {!(usuario?.abogadoId) ? <Clientes />:<Signin/>}
+          <Route exact path={usuario?.abogadoId!=null ?"/user/abogado/clientes": "/ingreso"}>
+          {usuario?.abogadoId!=null ? <Clientes />:<Signin/>}
           </Route>
-          <Route exact path={!(usuario?.abogadoId) ?"/user/abogado/consultas": "/ingreso"}>
-          {!(usuario?.abogadoId) ? <VistaConsultasAbogado />:<Signin/>}
+          <Route exact path={usuario?.abogadoId!=null ?"/user/abogado/consultas": "/ingreso"}>
+          {usuario?.abogadoId!=null ? <VistaConsultasAbogado />:<Signin/>}
           </Route>
-          <Route exact path={!(usuario?.abogadoId) ?"/user/abogado/modificar-perfil": "/ingreso"} component={!(usuario?.abogadoId) ?ModificarAbogado: Signin} />
-          <Route exact path={!(usuario?.abogadoId) ?"/user/abogado/nuevo-caso": "/ingreso"}>
-          {!(usuario?.abogadoId) ? <FormCasos />:<Signin/>}
+          <Route exact path={usuario?.abogadoId!=null ?"/user/abogado/modificar-perfil": "/ingreso"} component={usuario?.abogadoId!=null ?ModificarAbogado: Signin} />
+          <Route exact path={usuario?.abogadoId!=null ?"/user/abogado/nuevo-caso": "/ingreso"}>
+          {usuario?.abogadoId!=null ? <FormCasos />:<Signin/>}
           </Route>
           
           {/* <Route component={ErrorPage} path="/:rest*" /> */}

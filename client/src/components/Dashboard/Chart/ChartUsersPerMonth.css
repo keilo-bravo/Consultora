@@ -1,0 +1,12 @@
+#chartUPR {
+  width: 1000px;
+  height: 300px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 5px;
+  background: #fff;
+}
+
+#chartUPR h5 {
+  margin-left: 30px;
+  margin-top: 5px;
+}

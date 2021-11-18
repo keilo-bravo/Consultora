@@ -16,7 +16,6 @@ const Header = () => {
       >
         <div className="carousel-inner ">
           <div className="bg_one_caption  height_image carousel-item active">
-            {/* <img src={Image_One} className="d-block w-100" alt="Image_One" /> */}
             <div className="carousel-caption d-none d-md-block text-white caption_one ">
               <img src={Logo} alt="Logo" />
               <h5>Bienvenido a Buffet Law</h5>
@@ -25,7 +24,6 @@ const Header = () => {
           </div>
 
           <div className="bg_two_caption height_image carousel-item col-md-5">
-            {/* <img src={Image_Two} className="d-block w-100" alt="Image_Two" /> */}
             <div className="carousel-caption d-none d-md-block m_top_header caption_two">
               <h5>¿Quieres una Consulta rápida?</h5>
               <ButtonsNav nameClass="btn textDecoration" link="#" text="Presiona aquí  " />
@@ -33,21 +31,13 @@ const Header = () => {
           </div>
 
           <div className="bg_three_caption height_image carousel-item">
-            {/* <img
-              src={Image_Three}
-              className="d-block w-100"
-              alt="Image_Three"
-            /> */}
             <div className="carousel-caption d-none d-md-block  caption_three">
               <h5>
                 Nuestro Equipo esta lleno de expertos versatiles para que sean
                 tu
               </h5>
               <h5>SOLUCIÓN</h5>
-              {/* <Link className="btn" to="#">
-                Ver el Equipo
-              </Link> */}
-              <ButtonsNav nameClass="btn textDecoration" link="#" text="Ver el Equipo" />
+              <ButtonsNav nameClass="btn textDecoration" link="/abogados" text="Ver el Equipo" />
             </div>
           </div>
         </div>

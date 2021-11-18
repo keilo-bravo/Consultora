@@ -1,27 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ListBanner from "./ListBanner/ListBanner.jsx";
 import Logo from "../assets/img/logo-blacno-sin-fondo.png";
 import "./Banner.css";
 
 const Banner = (props) => {
-  const { divContain, title, flexList, widthListOne, widthListTwo } = props;
+  const { divContain, title, flexList, widthListOne, widthListTwo, items } = props;
+  const [listItems, setListItems] = useState([])
+  useEffect(() => {
+    let aux = []
+    aux.push(items.slice(0, 4))
+    aux.push(items.slice(4, items.length))
+    setListItems(aux)
+  }, [items])
+  console.log(listItems)
   return (
     <div className={divContain}>
       <div>
         <h4>{title}</h4>
         <div className={flexList}>
           <ul className={widthListOne}>
-            <ListBanner textList="Sumamos mas de 20 años de experiencia." />
-            <ListBanner textList="Mas de 100 casos resueltos." />
-            <ListBanner textList="Atendemos casos especiales y personalizados." />
-            <ListBanner textList="Atención del caso de inmediato." />
+            {
+              listItems[0]?.map((e) => (<ListBanner textList={e.descripcion} />))
+            }
           </ul>
           <img src={Logo} alt="Logo" />
           <ul className={widthListTwo}>
-            <ListBanner textList="Somos expertos para casos de personas naturales y jurídicas." />
-            <ListBanner textList="Nos desempeñamos en áreas empresariales y de manera muy personalizada." />
-            <ListBanner textList="Somos leales y discretos en cada caso." />
-            <ListBanner textList="Contamos con doctores especializados en cada materia legal." />
+            {
+              listItems[1]?.map((e) => (<ListBanner textList={e.descripcion} />))
+            }
           </ul>
         </div>
       </div>

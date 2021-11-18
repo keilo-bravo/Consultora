@@ -1,9 +1,9 @@
 import React from 'react'
 
-const EstadoSelect = ({ handlerEstado }) => {
+const EstadoSelect = ({ handlerEstado, className }) => {
     return (
         <>
-            <select onChange={handlerEstado}>
+            <select onChange={handlerEstado} className={className}>
                 <option disabled>Seleccione el Estado</option>
                 <option value="inicio">Inicio</option>
                 <option value="prueba">Prueba</option>

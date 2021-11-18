@@ -8,7 +8,7 @@ const router = Router();
 router.get("/casos", get.getCasos)
 router.post("/casos/new", post.setCasos)
 router.put("/casos/put", put.putCaso)
-
+router.get("/casos/all", get.getAllCasos)
 
 
 module.exports = router; 

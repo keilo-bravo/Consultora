@@ -53,6 +53,7 @@ export const validate = (input) => {
         errors.eMail = 'Se requiere un email';
     }
 
+
     /* Verificacion de la medida Cautelar */
     // else if (!input.medidaCautelar) {
     //     errors.medidaCautelar = 'Se requiere el ingreso de la medida cautelar por favor';

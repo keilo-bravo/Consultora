@@ -7,7 +7,7 @@ import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 
 export default function NavAbogado() {
-  let usuario = useSelector((state) => state.usuario);
+  let usuario = useSelector((state) => state.usuario)
 
   const history = useHistory();
 
@@ -19,7 +19,7 @@ export default function NavAbogado() {
       .then(() => {
         dispatch(getUsuario({}));
         toast.info("La sesión fue finalizada");
-        localStorage.removeItem('username')
+        localStorage.removeItem("username");
         history.push("/");
       })
       .catch((error) => {
@@ -33,7 +33,7 @@ export default function NavAbogado() {
         <div className="izquierda">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link to="/" className="nav-link">
+              <Link to="/user/abogado" className="nav-link">
                 Home 🏠
               </Link>
             </li>
@@ -43,7 +43,7 @@ export default function NavAbogado() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="#" className="nav-link">
+              <Link to="/user/abogado/casos" className="nav-link">
                 Casos 📔
               </Link>
             </li>
@@ -58,10 +58,21 @@ export default function NavAbogado() {
               </Link>
             </li>
             <li className="nav-item">
+              <Link to="/user/abogado/gestionar-turnos" className="nav-link">
+                Turnos 📅
+              </Link>
+            </li>
+            <li className="nav-item">
+              {usuario.adminId &&
+                <Link to="/admin" className="nav-link">
+                  Admin
+                </Link>
+              }
+            </li>
+            <li className="nav-item">
               <a onClick={logout} className="nav-link pointer">
                 Salir ❌
               </a>
-
             </li>
           </ul>
         </div>

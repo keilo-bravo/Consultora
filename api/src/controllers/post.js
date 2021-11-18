@@ -1,7 +1,6 @@
 const { uuid } = require("uuidv4");
 const cloudinary = require("../config/cloudinary");
 const enviarEmail = require("../email/email");
-const axios = require("axios");
 const mercadopago = require("../config/MercadoPago");
 const bodyParser = require("body-parser");
 
@@ -14,16 +13,18 @@ const {
   Consulta,
   Admin,
   Materias,
-  Ticket
+  Ticket,
+  Items,
+  Resena,
+  Dia,
+  Turno,
 } = require("../db");
 // let vec=["Derecho Penal", "Derecho Civil", "Derecho Corporativo", "Derecho Comercial", "Derecho Familia", "Derecho Contencioso",
 // "Derecho Administrativo", "Derecho Laboral", "Derecho Notarial"]
 
-//MP -Generar link de pago
+//MP
 const postTickets = async (req, res, next) => {
   const { title, unit_price, casoid, consultaid } = req.body;
-
-  console.log(title, unit_price, casoid, consultaid);
 
   let preference = {
     items: [
@@ -35,10 +36,8 @@ const postTickets = async (req, res, next) => {
     ],
   };
   try {
+    const response = await mercadopago.preferences.create(preference);
 
-    const response = await mercadopago.preferences.create(preference)
-
-    // console.log(response.body.init_point);
     let ticket = {
       titulo: title,
       precio: unit_price,
@@ -46,76 +45,42 @@ const postTickets = async (req, res, next) => {
       n_operacion: "",
       estatus: "pending",
       detalle_estatus: "not accredited",
-      medioDePago: "No information"
-    }
+      medioDePago: "No information",
+    };
     // Tickets.create(ticket)
     if (!!casoid) {
-      const cass = await Consulta.findByPk(casoid)
+      const cass = await Consulta.findByPk(casoid);
 
-      const tickets = await Ticket.create(ticket)
+      const tickets = await Ticket.create(ticket);
 
-
-      tickets.setCasos(cass)
-
+      tickets.setCasos(cass);
 
       res.json({
-        cass, tickets
+        cass,
+        tickets,
       });
-    }
-    else {
-      const consul = await Consulta.findByPk(consultaid)
+    } else {
+      const consul = await Consulta.findByPk(consultaid);
 
-      const tickets = await Ticket.create(ticket)
+      const tickets = await consul.setTicket(tickets);
 
-
-      consul.setTicket(tickets)
-
+      tickets.setConsultum(consul);
 
       res.json({
-        consul, tickets
+        consul,
+        tickets,
       });
       // res.sendStatus(200);
     }
-  }
-  catch {
+  } catch {
     (function (error) {
       console.log(error);
-    })
+    });
   }
 };
-//MP automatizado
-const postPago = async (req, res, next) => {
-  const MPInfo = req.body
-
-  try {
-    const mpApi = (await axios.get(`https://api.mercadopago.com/v1/payments/${MPInfo.data.id}?access_token=${process.env.MERCADOPAGO_API_PROD_ACCESS_TOKEN}`)).data
-
-    const ticket = await Ticket.findOne({ where: { titulo: mpApi.description } });
-
-    if (mpApi.description && ticket.titulo===mpApi.description){
-      ticket.n_operacion = mpApi.id
-      ticket.estatus = mpApi.status
-      ticket.detalle_estatus = mpApi.status_detail
-      ticket.medioDePago = mpApi.payment_type_id
-  
-      Promise.all([
-        await ticket.save(),
-      ]);
-      res.sendStatus(200);
-    }
-
-      res.sendStatus(201);
-  } catch (error) {
-    console.log(error);
-    return res.sendStatus(500);
-  }
-}
-
 // CLOUDINARY
 async function subirImagen(req, res) {
   const { email } = req.body;
-
-  console.log(req.files);
 
   try {
     let result = await cloudinary.uploader.upload(
@@ -193,13 +158,10 @@ async function setUsuarios(req, res) {
           lastName,
           celular,
         });
-        const client = await Cliente.create({});
 
         const adm = await Admin.create({ tipo: "gm" });
         person.setUsuario(user);
-        client.setUsuario(user);
         adm.setUsuario(user);
-        client.setPersona(person);
         res.sendStatus(200);
       } else res.sendStatus(500);
     } else {
@@ -234,28 +196,36 @@ async function setAbogado(req, res) {
   try {
     const { eMail, flag } = req.body;
     let user = await Usuario.findByPk(eMail);
+    console.log(user);
     let persona = await Persona.findByPk(user.personaDni);
     if (flag) {
       const abogado = await Abogado.create({});
       if (user) {
         user.slug = `${persona.firstName}-${persona.lastName}`;
+        const cliente = await Cliente.findByPk(user.clienteId);
+        if (cliente) await cliente.destroy();
         abogado.setUsuario(user);
         abogado.setPersona(persona);
         return res.sendStatus(200);
       }
       return res.sendStatus(404);
     } else {
+      if (!user.adminId) {
+        const client = await Cliente.create();
+        const person = await Cliente.findByPk(user.personaDni);
+        client.setUsuario(user);
+        client.setPersona(person);
+      }
       let abogado = await Abogado.findByPk(user.abogadoId);
-      await abogado.destroy();
+      await abogado?.destroy();
       abogado = await Abogado.findByPk(user.abogadoId);
       if (!abogado) return res.sendStatus(200);
       else return res.sendStatus(500);
     }
   } catch (error) {
     console.log(error);
-    res.sendStatus(500);
+    return res.sendStatus(500);
   }
-  return res.sendStatus(404);
 }
 
 async function setCasos(req, res) {
@@ -267,16 +237,16 @@ async function setCasos(req, res) {
       juzgado,
       detalle,
       estado,
-      eMail,
       medidaCautelar,
       trabaAfectiva,
       vtoMedidaCautelar,
       vtoTrabaAfectiva,
       jurisdiccion,
-      materia
+      materia,
+      id,
     } = req.body;
 
-    const caso = await Casos.create({
+    const caso = Casos.build({
       trabaAfectiva,
       medidaCautelar,
       numeroLiquidacion,
@@ -292,12 +262,14 @@ async function setCasos(req, res) {
       vtoTrabaAfectiva,
       jurisdiccion,
     });
-    const auxMateria = await Materias.findByPk(materia)
-    auxMateria.addCasos(caso)
-    const { clienteId } = await Usuario.findByPk(eMail);
-    const cliente = await Cliente.findByPk(clienteId);
-    cliente.addCasos(caso);
-    res.sendStatus(200);
+    const cliente = await Cliente.findByPk(id);
+    if (cliente) {
+      await caso.save();
+      const auxMateria = await Materias.findByPk(materia);
+      auxMateria.addCasos(caso);
+      cliente.addCasos(caso);
+      return res.sendStatus(200);
+    } else return res.sendStatus(404);
   } catch (error) {
     console.log(error);
     res.sendStatus(404);
@@ -332,54 +304,29 @@ async function setConsulta(req, res, next) {
     }
   }
 }
-// async function setAdmin(req, res) {
-//   const { eMail, firstName, dni, lastName, celular, password } = req.body
-//   try {
-//     let aux = await Usuario.findByPk(eMail)
-//     let aux2 = await Persona.findByPk(dni)
-//     if (!aux && !aux2) {
-//       const user = await Usuario.create({
-//         eMail,
-//         password
-//       })
 
-//       const person = await Persona.create({
-//         firstName,
-//         dni,
-//         lastName,
-//         celular
-//       })
-//       const admin = await Admin.create({})
-
-//       person.setUsuario(user)
-//       admin.setUsuario(user)
-//       // client.setPersona(person)
-//       res.sendStatus(200)
-//     }
-//     else if (!aux.adminId) {
-//       const admin = await Admin.create({})
-//       admin.setUsuario(aux)
-//       res.sendStatus(200)
-//     } else res.sendStatus(500)
-
-//   } catch (error) {
-//     console.log(error)
-//     res.sendStatus(500)
-//   }
-
-// }
 async function setAdmin(req, res) {
   try {
     const { eMail, flag } = req.body;
     let user = await Usuario.findByPk(eMail);
     if (flag) {
       const admin = await Admin.create({ tipo: "normal" });
+      if (user.clienteId) {
+        const client = await Cliente.findByPk(user.clienteId);
+        await client.destroy();
+      }
       if (user) {
         admin.setUsuario(user);
         return res.sendStatus(200);
       }
       return res.sendStatus(404);
     } else {
+      if (!user.abogadoId) {
+        const client = await Cliente.create();
+        const person = await Persona.findByPk(user.personaDni);
+        client.setUsuario(user);
+        client.setPersona(person);
+      }
       let admin = await Admin.findByPk(user.adminId);
       await admin.destroy();
       admin = await Abogado.findByPk(user.adminId);
@@ -392,13 +339,135 @@ async function setAdmin(req, res) {
   }
 }
 
+async function setReseña(req, res, next) {
+  const { abogadoId, clienteId, titulo, mensaje, puntuacion } = req.body;
+  if (abogadoId && clienteId && titulo && mensaje && puntuacion) {
+    try {
+      let reseña = {
+        abogadoId,
+        clienteId,
+        titulo,
+        mensaje,
+        puntuacion,
+      };
+      await Resena.create(reseña);
+      res.sendStatus(200);
+    } catch (error) {
+      console.log(error);
+      next({ msg: "fallo algo en post reseña" });
+    }
+  } else {
+    sen.sendStatus(500);
+  }
+}
+
+async function postDia(req, res) {
+  const { form, abogadoId } = req.body;
+  const { fechas, nota, turnos } = form;
+
+  try {
+    const abogado = await Abogado.findByPk(abogadoId);
+
+    fechas.map((d) => {
+      return Dia.create({ fecha: d, nota }).then((dia) => {
+        abogado.addDia(dia);
+        turnos.map((turno) => {
+          return Turno.create({ hora: turno.hora, diumId: dia.id }).then(
+            () => {}
+          );
+        });
+      });
+    });
+
+    return res.json({ mensaje: "Creados con éxito" });
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(500);
+  }
+}
+
+async function confirmarTurno(req, res) {
+  const { clienteId, turnoId, fecha } = req.body;
+
+  try {
+    const cliente = await Cliente.findByPk(clienteId);
+
+    const turno = await Turno.findByPk(turnoId);
+
+    if (turno.clienteId) {
+      return res.status(400).json({ mensaje: "El turno fue tomado" });
+    }
+
+    await cliente.setTurno(turno);
+
+    const { eMail } = await cliente.getUsuario();
+
+    enviarEmail.send({
+      email: eMail,
+      fecha: new Date(fecha).toLocaleDateString(),
+      hora: turno.hora,
+      subject: "Turno confirmado",
+      htmlFile: "turno-confirmado.html",
+    });
+
+    return res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(500);
+  }
+}
+
+//MP automatizado
+const postPago = async (req, res, next) => {
+  const MPInfo = req.body;
+
+  try {
+    const mpApi = (
+      await axios.get(
+        `https://api.mercadopago.com/v1/payments/${MPInfo.data.id}?access_token=${process.env.MERCADOPAGO_API_PROD_ACCESS_TOKEN}`
+      )
+    ).data;
+
+    const ticket = await Ticket.findOne({
+      where: { titulo: mpApi.description },
+    });
+
+    if (mpApi.description && ticket.titulo === mpApi.description) {
+      ticket.n_operacion = mpApi.id;
+      ticket.estatus = mpApi.status;
+      ticket.detalle_estatus = mpApi.status_detail;
+      ticket.medioDePago = mpApi.payment_type_id;
+
+      Promise.all([await ticket.save()]);
+      res.sendStatus(200);
+    }
+
+    res.sendStatus(201);
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(500);
+  }
+};
+
+async function items(req, res) {
+  try {
+    const { descripcion } = req.body;
+    // const { descripcion } = item
+    const item = await Items.create({ descripcion: descripcion });
+    console.log(item);
+    res.sendStatus(200);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+}
 
 async function reiniciarPassword(req, res) {
   const { eMail, password } = req.body;
 
   try {
-    const thisUsers = await Usuario.findOne({where:{eMail:eMail}});
-    
+    const thisUsers = await Usuario.findOne({ where: { eMail: eMail } });
+
     if (thisUsers.eMail != undefined) {
       thisUsers.password = password;
 
@@ -416,11 +485,14 @@ module.exports = {
   setCasos,
   setAbogado,
   setConsulta,
-  // setPersona,
   setAdmin,
   eliminarImagen,
   subirImagen,
   postTickets,
+  items,
   reiniciarPassword,
-  postPago
+  setReseña,
+  postPago,
+  postDia,
+  confirmarTurno,
 };

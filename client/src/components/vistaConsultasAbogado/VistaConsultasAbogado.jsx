@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { Redirect } from "react-router";
-import { getConsultas, getTickets } from "../../redux/actions";
+import { getConsultas } from "../../redux/actions";
 import ModalConsulta from "./modalConsulta/ModalConsulta";
 import TablaVistasConsultas from "./tablaVistasConsultas/TablaVistasConsultas";
 import "./VistaConsultasAbogados.css";
@@ -11,17 +11,28 @@ export default function VistaConsultasAbogado() {
   let [busquedaTodas, setBusquedaTodas] = useState("");
   let [busquedaAceptadas, setBusquedaAceptadas] = useState("");
 
+  const [actualizando, setActualizando] = useState(false);
+
   const dispatch = useDispatch();
   const { consultas, usuario } = useSelector((state) => state);
 
   useEffect(() => {
     dispatch(getConsultas());
-  }, []);
+  }, [dispatch]);
 
   function actualizarConsultas() {
     dispatch(getConsultas());
+
+    setActualizando(true);
+    
+    setTimeout(() => {
+      setActualizando(false);
+    }, 4000);
+    
     toast.success("Las consultas fueron actualizadas");
   }
+
+  
 
   return !usuario.abogadoId ? (
     <Redirect to="/" />
@@ -75,8 +86,9 @@ export default function VistaConsultasAbogado() {
           <button
             onClick={actualizarConsultas}
             className="mx-5 btn btn-light border"
+            disabled={actualizando}
           >
-            🔁 Actualizar
+            { actualizando ? '🔁 Actualizando' : '🔁 Actualizar' }
           </button>
         </div>
       </nav>

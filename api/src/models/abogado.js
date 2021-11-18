@@ -15,6 +15,9 @@ module.exports = (sequelize) => {
     },
     experiencia: {
       type: DataTypes.TEXT
+    },
+    matricula: {
+      type: DataTypes.STRING
     }
   });
 

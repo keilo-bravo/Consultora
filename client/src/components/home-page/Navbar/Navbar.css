@@ -135,7 +135,7 @@ nav ul .imgLogo {
 @media (min-width: 1592px) and (max-width: 1920px) {
     #menu {
         position: relative;
-        top     : -30px;
+        top     : -20px;
     }
 
     .widht_li li:nth-child(4) {

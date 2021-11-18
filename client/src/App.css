@@ -19,9 +19,34 @@ html {
   scroll-behavior: smooth;
 }
 
-/* #root {
-  min-height: 2000px;
+body {
+  width: 100%;
+}
+
+button {
+  border    : none;
+  background: none;
+  cursor    : pointer;
+}
+
+
+/* button {
+  outline      : 0;
+  border       : 0;
+  background   : #d4e6f4;
+  padding      : 6px;
+  cursor       : pointer;
+  border-radius: 2px;
 } */
+
+/* button:focus {
+  outline: none;
+  border : none;
+} */
+
+.hidden {
+  overflow: hidden !important;
+}
 
 .textDecoration {
   text-decoration: none;
@@ -30,4 +55,65 @@ html {
 
 .App {
   padding: 0px;
+}
+
+.btn-primaryNuestro {
+  background-color: #033663 !important;
+}
+
+.btn-primaryNuestro {
+  background-color: #033663 !important;
+  border: #033663 solid 1px !important;
+  outline: none !important;
+  color: white !important;
+  transition: .4s ease-out all !important;
+}
+.btn-primaryNuestro:focus, 
+.btn-primaryNuestro:link,
+.btn-primaryNuestro:visited {
+  outline: #033663 !important;
+  box-shadow: none !important;
+  border: #033663 solid 1px !important;
+}
+.btn-primaryNuestro:hover {
+  color: white !important;
+  background-color: #033663cb !important;
+}
+
+.btn-secondaryNuestro {
+  background-color: #333 !important;
+  border: #333 solid 1px !important;
+  outline: none !important;
+  color: white !important;
+  transition: .4s ease-out all !important;
+}
+.btn-secondaryNuestro:focus, 
+.btn-secondaryNuestro:link,
+.btn-secondaryNuestro:visited {
+  outline: #333 !important;
+  box-shadow: none !important;
+  border: #333 solid 1px !important;
+}
+.btn-secondaryNuestro:hover {
+  color: white !important;
+  background-color: rgba(51, 51, 51, 0.842) !important;
+}
+
+.btn-dangerNuestro {
+  background-color: #bf2231 !important;
+  border: #bf2231 solid 1px !important;
+  outline: none !important;
+  color: white !important;
+  transition: .4s ease-out all !important;
+}
+.btn-dangerNuestro:focus, 
+.btn-dangerNuestro:link,
+.btn-dangerNuestro:visited {
+  outline: #bf2231 !important;
+  box-shadow: none !important;
+  border: #bf2231 solid 1px !important;
+}
+.btn-dangerNuestro:hover {
+  color: white !important;
+  background-color: #bf2232c9 !important;
 }

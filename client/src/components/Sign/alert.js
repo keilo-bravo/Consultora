@@ -39,7 +39,7 @@ export const dniNoOK = () => {
 
 export const sessionIN = () => {
     swal({
-        title: "WELCOME",
+        title: "Bienvenido",
         text: '',
         icon: "success",
         button: "Aceptar"
@@ -51,6 +51,15 @@ export const sessionOUT = () => {
         title: "GOODBYE",
         text: '',
         icon: "warning",
+        button: "Aceptar"
+    })
+}
+
+export const usuarioBloqueado = () => {
+    swal({
+        title: "Usuario bloqueado",
+        text: 'Su cuenta se encuentra bloqueada',
+        icon: "error",
         button: "Aceptar"
     })
 }

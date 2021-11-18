@@ -27,7 +27,7 @@
 
 .abogado {
     position: relative;
-    width   : 85% !important;
+    width   : 100% !important;
 }
 
 .abogado img {
@@ -67,17 +67,19 @@
 .text_equipo p:last-of-type {
     font-weight: lighter;
     font-style : italic;
+    max-width  : 80%;
+    margin     : auto;
 }
 
 .button_ver_mas {
-    width     : 80%;
+    width     : 60%;
     margin    : auto;
     margin-top: 10px;
 }
 
 
 .button_ver_mas a {
-    width           : 30%;
+    width           : 80%;
     margin          : auto;
     position        : relative;
     display         : block;

@@ -25,7 +25,21 @@ let transport = nodemailer.createTransport({
 exports.send = async (options) => {
 
     const file = await readFile(`${__dirname}/plantillas/${options.htmlFile}`, 'utf8');
-    const result = file.replace('[[mensaje]]', options.mensaje);
+
+    let result;
+
+    if(options.fecha) {
+        let mapObj = {
+            fecha: options.fecha,
+            hora: options.hora,
+        }
+        result = file.replace(/fecha|hora/gi,function(matched){
+            return mapObj[matched];
+        });
+    } else {
+        result = file.replace('[[mensaje]]', options.mensaje);
+    }
+    
     
     let mailOptions = {
         from: '',

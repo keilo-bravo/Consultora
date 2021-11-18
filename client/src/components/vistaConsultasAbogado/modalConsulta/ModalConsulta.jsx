@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import swal from "sweetalert";
+import ReactWhatsapp from 'react-whatsapp';
 import {
   deleteConsulta,
   getConsultas,
   setConsulta,
   postTickets,
+  setCliente,
 } from "../../../redux/actions";
 
 
@@ -35,7 +37,7 @@ export default function ModalConsulta({ usuario, modalId }) {
       if (willDelete) {
         const titulo = `${usuario.firstName + " " + usuario.lastName
           } - Consulta ${consulta.id}`;
-        
+
         dispatch(setConsulta(consulta.id, usuario.abogado.id, respuesta)).then(
           () => {
             if (price > 0) {
@@ -55,6 +57,7 @@ export default function ModalConsulta({ usuario, modalId }) {
 
         })
       }
+      dispatch(setCliente(consulta.email, usuario.abogado.id));
       setRespuesta("");
     });
   }
@@ -118,7 +121,12 @@ export default function ModalConsulta({ usuario, modalId }) {
                 </li>
                 <li className="list-group-item ">
                   <span>Teléfono: </span>
-                  {consulta?.telefono}
+                  {
+                    (consulta?.telefono) && 
+                    <ReactWhatsapp className="btn btn-success" number={'+549'+consulta?.telefono} message={`Buenos días, ${consulta?.nombre}. Te contacto de La Consultora.`}>
+                      📱 {consulta?.telefono}
+                    </ReactWhatsapp>
+                  }
                 </li>
                 <li className="list-group-item ">
                   <span>Email: </span>
@@ -181,7 +189,7 @@ export default function ModalConsulta({ usuario, modalId }) {
                 <div className="modal-footer">
                   <button
                     type="button"
-                    className="btn btn-danger"
+                    className="btn btn-dangerNuestro"
                     data-bs-dismiss="modal"
                     onClick={eliminarConsulta}
                   >
@@ -189,7 +197,7 @@ export default function ModalConsulta({ usuario, modalId }) {
                   </button>
                   <button
                     type="button"
-                    className="btn btn-primary"
+                    className="btn btn-primaryNuestro"
                     data-bs-dismiss="modal"
                     onClick={confimarConsulta}
                   >
@@ -212,7 +220,7 @@ export default function ModalConsulta({ usuario, modalId }) {
                 <div className="modal-footer">
                   <button
                     type="button"
-                    className="btn btn-danger"
+                    className="btn btn-dangerNuestro"
                     data-bs-dismiss="modal"
                     onClick={eliminarConsulta}
                   >

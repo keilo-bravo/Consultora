@@ -1,13 +1,14 @@
 import React from "react";
 
 const InputGlobal = (props) => {
-    const {
-        type,
-        placeholder,
-        name,
-        value,
-        handleInput
-    } = props
+  const {
+    type,
+    placeholder,
+    name,
+    value,
+    handleInput,
+    className
+  } = props
   return (
     <>
       <input
@@ -19,6 +20,7 @@ const InputGlobal = (props) => {
         onKeyUp={handleInput}
         onBlur={handleInput}
         autoComplete="off"
+        className={className}
       />
     </>
   );

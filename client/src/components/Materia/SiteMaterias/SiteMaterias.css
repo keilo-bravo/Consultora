@@ -1,0 +1,367 @@
+.body_site_materia {
+    position  : relative;
+    width     : 100%;
+    min-height: 100vh;
+    background-image: linear-gradient(to bottom,
+            #033663,
+            #0e4475,
+            #175288,
+            #20619b,
+            #2870af);
+    overflow: hidden;
+}
+
+.body_site_materia img {
+    width              : 300px;
+    height             : 300px;
+    object-fit         : cover;
+    -webkit-box-reflect: below 2px linear-gradient(transparent, transparent, #0004);
+    transform-origin   : center;
+
+    transition: 0.5s;
+    display   : block;
+}
+
+.body_site_materia h2 {
+    text-decoration: underline;
+    cursor         : default;
+}
+
+
+.body_site_materia h3 {
+    position: relative;
+    color          : #fff;
+    padding-bottom : 5px;
+    text-decoration: underline;
+    max-width      : 28%;
+    margin         : auto;
+    transform      : translateY(20%);
+    font-size      : 34px;
+    z-index: 10;
+}
+
+.body_site_materia .button_back_site_materia {
+    display         : flex;
+    justify-content : space-between;
+    padding         : 10px;
+    background-color: rgb(243, 241, 241);
+    padding         : 20px;
+    margin-bottom   : 20px;
+}
+
+.body_site_materia .button_back_site_materia img {
+    display   : block;
+    object-fit: cover;
+    width     : 4%;
+    height    : 40px;
+}
+
+
+.body_site_materia .button_back_site_materia button {
+    position           : relative;
+    display            : inline-block;
+    padding            : 5px;
+    width              : 5%;
+    /* background-color: #fff; */
+    border             : 1px solid #033663;
+    color              : #033663;
+    transition         : all 0.4s ease-out;
+}
+
+
+.body_site_materia .button_back_site_materia button::before {
+    position        : absolute;
+    content         : "";
+    bottom          : 0;
+    left            : 0;
+    width           : 100%;
+    height          : 100%;
+    transform-origin: left 0;
+    transform       : scaleX(0);
+    z-index         : -1;
+    transition      : all 0.4s ease-out;
+    background-color: #033663;
+}
+
+
+.body_site_materia .button_back_site_materia button:hover {
+    transform: translateZ(0);
+    color    : #fff;
+    border   : solid 1px #fff;
+}
+
+
+.body_site_materia .button_back_site_materia button:hover::before {
+    transform: scaleX(1);
+}
+
+.body_site_materia .container_flex_materias_site {
+    display        : flex;
+    width          : 100%;
+    justify-content: center;
+    align-items    : center;
+    color          : #fff;
+    transform      : translateY(-10%);
+}
+
+.body_site_materia .container_flex_materias_site a {
+    color: #fff;
+}
+
+
+.body_site_materia .container_flex_materias_site .flex_materias_site {
+    width: 55%;
+}
+
+.body_site_materia .carrusel_siteMaterias .izuVIe {
+    overflow: initial !important;
+}
+
+.body_site_materia .carrusel_siteMaterias button {
+    background-color: transparent !important;
+    box-shadow      : none;
+    color           : #fff;
+    outline         : 0;
+    cursor          : pointer;
+}
+
+.body_site_materia .carrusel_siteMaterias button:hover,
+.body_site_materia .carrusel_siteMaterias button:focus {
+    background-color: transparent !important;
+    border          : none !important;
+    border-color    : transparent;
+    border-radius   : 0;
+    color           : #ccc !important;
+    box-shadow      : none !important;
+}
+
+.body_site_materia .container_flex_materias_site .contain_text_site_materia {
+    transform: translateY(27%);
+    width    : 45%;
+}
+
+.body_site_materia .container_flex_materias_site .contain_text_site_materia p,
+.body_site_materia .container_flex_materias_site .contain_text_site_materia a {
+    display  : block;
+    max-width: 80%;
+    margin   : auto;
+    font-size: 17px;
+}
+
+.body_site_materia .container_flex_materias_site .contain_text_site_materia p {
+    line-height  : 35px;
+    margin-bottom: 20px;
+    text-align   : justify;
+}
+
+.body_site_materia .container_flex_materias_site .contain_text_site_materia div {
+    width: 100%;
+}
+
+.body_site_materia .container_flex_materias_site .contain_text_site_materia .button_consulta_site_materia {
+    width: 100%;
+}
+
+.body_site_materia .container_flex_materias_site .contain_text_site_materia .button_consulta_site_materia a {
+    display   : block;
+    width     : 50%;
+    border    : 1px solid #012341;
+    padding   : 8px;
+    transform : translateX(-31%);
+    transition: all .4s ease-out;
+    color     : #fff;
+}
+
+.body_site_materia .container_flex_materias_site .contain_text_site_materia .button_consulta_site_materia a:hover {
+    color: #033663;
+}
+
+.body_site_materia .container_flex_materias_site .contain_text_site_materia .button_consulta_site_materia a:after {
+    position  : absolute;
+    transition: 0.3s;
+    content   : "";
+    width     : 0;
+    right     : 0;
+    left      : auto;
+    bottom    : 0;
+    height    : 100%;
+    background: #fff;
+    z-index   : -1;
+    transition: all .4s ease-out;
+}
+
+.body_site_materia .container_flex_materias_site .contain_text_site_materia .button_consulta_site_materia a:hover:after {
+    width: 100%;
+    left : 0;
+}
+
+.body_site_materia .container_flex_materias_site .flex_materias_site div {
+    flex-basis: 100%;
+}
+
+
+
+/***************** Sin Carrrusel *********************/
+
+.body_site_sin_carousel {
+    position  : relative;
+    width     : 100%;
+    min-height: 100vh;
+    background-image: linear-gradient(to bottom,
+            #033663,
+            #0e4475,
+            #175288,
+            #20619b,
+            #2870af);
+    overflow: hidden;
+}
+
+
+.body_site_sin_carousel img {
+    width     : 100%;
+    height    : 400px;
+    object-fit: cover;
+    transition: 0.5s;
+    display   : block;
+}
+
+.body_site_sin_carousel h2 {
+    text-decoration: underline;
+    cursor         : default;
+}
+
+
+.body_site_sin_carousel h3 {
+    position: relative;
+    color          : #fff;
+    padding-bottom : 5px;
+    text-decoration: underline;
+    font-size      : 30px;
+    max-width      : 28%;
+    margin         : auto;
+    margin-bottom  : 26px;
+    transform      : translateY(0%);
+    z-index: 10;
+}
+
+.body_site_sin_carousel .button_back_site_materia {
+    display         : flex;
+    justify-content : space-between;
+    padding         : 10px;
+    background-color: rgb(243, 241, 241);
+    padding         : 20px;
+    margin-bottom   : 20px;
+}
+
+.body_site_sin_carousel .button_back_site_materia img {
+    display   : block;
+    object-fit: cover;
+    width     : 4%;
+    height    : 40px;
+}
+
+
+.body_site_sin_carousel .button_back_site_materia button {
+    position           : relative;
+    display            : inline-block;
+    padding            : 5px;
+    width              : 5%;
+    border             : 1px solid #033663;
+    color              : #033663;
+    transition         : all 0.4s ease-out;
+}
+
+.body_site_sin_carousel .button_back_site_materia button::before {
+    position        : absolute;
+    content         : "";
+    bottom          : 0;
+    left            : 0;
+    width           : 100%;
+    height          : 100%;
+    transform-origin: left 0;
+    transform       : scaleX(0);
+    z-index         : -1;
+    transition      : all 0.4s ease-out;
+    background-color: #033663;
+}
+
+.body_site_sin_carousel .button_back_site_materia button:hover {
+    transform: translateZ(0);
+    color    : #fff;
+    border   : solid 1px #033663;
+}
+
+.body_site_sin_carousel .button_back_site_materia button:hover::before {
+    transform: scaleX(1);
+}
+
+.body_site_sin_carousel .container_flex_materias_site {
+    display        : flex;
+    width          : 100%;
+    justify-content: center;
+    align-items    : center;
+    color          : #fff;
+}
+
+.body_site_sin_carousel .container_flex_materias_site a {
+    color: #fff;
+}
+
+.body_site_sin_carousel .imagen_site_materias {
+    position: relative;
+    width     : 50%;
+    transform : perspective(650px) rotateY(28deg);
+    box-shadow: 17px 17px 20px #033663fb;
+}
+
+.body_site_sin_carousel .imagen_site_materias::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: #0e437556;
+}
+
+.body_site_sin_carousel .contain_text_site_materia {
+    width: 50%;
+}
+
+.body_site_sin_carousel .contain_text_site_materia p,
+.body_site_sin_carousel .contain_text_site_materia a {
+    font-size  : 18px;
+    line-height: 30px;
+    text-align : justify;
+}
+
+.body_site_sin_carousel .contain_text_site_materia a {
+    display   : inline-block;
+    border    : #033663 solid 1px;
+    padding   : 10px;
+    margin-top: 10px;
+    transition: all .4s ease-out;
+}
+
+.body_site_sin_carousel .contain_text_site_materia a:hover {
+    transform: translateY(0);
+    color    : #033663;
+    border   : solid 1px #033663;
+}
+
+.body_site_sin_carousel .contain_text_site_materia a::after {
+    position  : absolute;
+    transition: 0.3s;
+    content   : "";
+    width     : 0;
+    right     : 0;
+    left      : auto;
+    bottom    : 0;
+    height    : 100%;
+    background: #fff;
+    z-index   : -1;
+    transition: all .4s ease-out;
+}
+
+.body_site_sin_carousel .contain_text_site_materia a:hover::after {
+    width: 100%;
+    left : 0;
+}

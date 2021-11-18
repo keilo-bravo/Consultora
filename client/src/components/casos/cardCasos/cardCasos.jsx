@@ -5,11 +5,12 @@ import { toast } from "react-toastify";
 
 
 
-export default function CardCasos({ detalle, estado, juez, juzgado, numeroExpediente, numeroLiquidacion, medidaCautelar, trabaAfectiva, vtoMedidaCautelar, vtoTrabaAfectiva, jurisdiccion, flag, materia }) {
+export default function CardCasos({ detalle, estado, juez, juzgado, fecha, numeroExpediente, numeroLiquidacion, medidaCautelar, trabaAfectiva, vtoMedidaCautelar, vtoTrabaAfectiva, jurisdiccion, flag, materia }) {
     const dispatch = useDispatch()
     const { materias } = useSelector(state => state)
     if (trabaAfectiva === null) trabaAfectiva = false
     if (medidaCautelar === null) medidaCautelar = false
+    fecha = fecha.slice(0, 10)
     const [input, setInput] = useState({
         detalle: detalle,
         estado: estado,
@@ -22,7 +23,8 @@ export default function CardCasos({ detalle, estado, juez, juzgado, numeroExpedi
         vtoMedidaCautelar: vtoMedidaCautelar,
         vtoTrabaAfectiva: vtoTrabaAfectiva,
         jurisdiccion: jurisdiccion,
-        materia: materia
+        materia: materia,
+        fecha
 
     })
     const [error, setError] = useState({
@@ -33,11 +35,13 @@ export default function CardCasos({ detalle, estado, juez, juzgado, numeroExpedi
         vtoTrabaAfectiva: "",
 
     })
-
     const handleSubmit = function (e) {
         e.preventDefault()
-        dispatch(putCaso(input))
-        toast.success('cambios realizados!');
+        if (error.medidaCautelar === "" || error.trabaAfectiva === "" || error.vtoMedidaCautelar === "" || error.vtoTrabaAfectiva === "") {
+
+            dispatch(putCaso(input))
+            toast.success('cambios realizados!');
+        } else toast.error("no se pudieron realizar los cambios")
     }
     const validate = function (name, value) {
         if (name === "trabaAfectiva") {
@@ -115,20 +119,19 @@ export default function CardCasos({ detalle, estado, juez, juzgado, numeroExpedi
             validate(e.target.name, e.target.value === "si" ? true : false)
         }
     }
-    console.log(input)
     return (
         flag ?
             <div className="container">
                 <div className="accordion accordion-flush ancho" id="accordionFlushExample">
                     <div className="accordion-item">
                         <h2 className="accordion-header" id={'a' + numeroLiquidacion}>
-                            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={'#e' + numeroLiquidacion} aria-expanded="false" aria-controls={'e' + numeroLiquidacion}>
+                            <button className="accordion-button collapsed mb-3" type="button" data-bs-toggle="collapse" data-bs-target={'#e' + numeroLiquidacion} aria-expanded="false" aria-controls={'e' + numeroLiquidacion}>
                                 <b>N° Liquidacion: {numeroLiquidacion}</b>
                             </button>
                         </h2>
                         <div id={'e' + numeroLiquidacion} className="accordion-collapse collapse" aria-labelledby={'a' + numeroLiquidacion} data-bs-parent="#accordionFlushExample">
-                            <form className="list-group" onSubmit={handleSubmit}>
-                                <li>Juez:<input className="list-group-item w-25" value={input.juez} onChange={e => setInput({ ...input, juez: e.target.value })} /></li>
+                            <form className="list-group mb-3" onSubmit={handleSubmit}>
+                                <li>Juez:<input className="list-group-item w-25 " value={input.juez} onChange={e => setInput({ ...input, juez: e.target.value })} /></li>
                                 {estado === "inicio" ?
                                     <li>Estado:<br />
                                         <select defaultValue={input.estado} className="custom-select custom-select-lg mb-3 w-25" onChange={e => setInput({ ...input, estado: e.target.value })}>
@@ -227,22 +230,23 @@ export default function CardCasos({ detalle, estado, juez, juzgado, numeroExpedi
                 <div className="accordion accordion-flush ancho" id="accordionFlushExample">
                     <div className="accordion-item">
                         <h2 className="accordion-header" id={'a' + numeroLiquidacion}>
-                            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={'#e' + numeroLiquidacion} aria-expanded="false" aria-controls={'e' + numeroLiquidacion}>
+                            <button className="accordion-button collapsed mb-3" type="button" data-bs-toggle="collapse" data-bs-target={'#e' + numeroLiquidacion} aria-expanded="false" aria-controls={'e' + numeroLiquidacion}>
                                 <b>N° Liquidacion: {numeroLiquidacion}</b>
                             </button>
                         </h2>
                         <div id={'e' + numeroLiquidacion} className="accordion-collapse collapse" aria-labelledby={'a' + numeroLiquidacion} data-bs-parent="#accordionFlushExample">
                             <ul className="list-group mb-3">
-                                <li className="list-group-item">Juez: {input.juez}</li>
+                                <li className="list-group-item">Juez: {input.juez ? input.juez : "no tiene"}</li>
                                 <li className="list-group-item">Estado: {input.estado}</li>
-                                <li className="list-group-item">Juzgado: {input.juzgado}</li>
+                                <li className="list-group-item">Juzgado: {input.juzgado ? input.juez : "no tiene"}</li>
                                 <li className="list-group-item">jurisdiccion: {input.jurisdiccion ? input.jurisdiccion : "ninguna"}</li>
-                                <li className="list-group-item">N° Expediente: {input.numeroExpediente}</li>
+                                <li className="list-group-item">N° Expediente: {input.numeroExpediente ? input.numeroExpediente : "no tiene"}</li>
                                 <li className="list-group-item">N° Liquidacion: {input.numeroLiquidacion}</li>
                                 <li className="list-group-item">Medida Cautelar: {input.medidaCautelar ? "si, hasta : " : "no"}{input.vtoMedidaCautelar ? input.vtoMedidaCautelar.slice(0, 10) : ""}</li>
                                 <li className="list-group-item">Traba Afectiva: {input.trabaAfectiva ? "si, hasta : " : "no"}{input.vtoTrabaAfectiva ? input.vtoTrabaAfectiva : ""}</li>
                                 <li className="list-group-item">Detalles: {input.detalle}</li>
                                 <li className="list-group-item">Materia: {input.materia}</li>
+                                <li className="list-group-item">Fecha: {input.fecha}</li>
 
                             </ul>
                         </div>

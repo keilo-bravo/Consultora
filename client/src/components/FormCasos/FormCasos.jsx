@@ -1,295 +1,214 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { validate } from "../controller/Validate";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import { postCasos } from "../../redux/actions";
-import ButtonSubmit from "../ButtonSubmit/ButtonSubmit";
-import InputGlobal from "../InputGlobal/InputGlobal.jsx";
-import TextTarea from "../TextTarea/TextTarea";
-import EstadoSelect from "../EstadoSelect/EstadoSelect.jsx";
 import "./FormCasos.css";
-import Navbar from "../home-page/Navbar/Navbar";
 
-const FormCasos = ({ label }) => {
-  /*Estados Locales____________________________ */
-
+const FormCasos = ({ cliente }) => {
+  const dispatch = useDispatch()
+  const { materias } = useSelector(state => state)
+  console.log(cliente)
   const [input, setInput] = useState({
-    juez: "",
-    numeroExpediente: parseInt("0"),
-    juzgado: parseInt("0"),
-    detalle: "",
-    estado: "",
-    eMail: "",
+    detalle: null,
+    estado: null,
+    juez: null,
+    juzgado: null,
+    numeroExpediente: null,
+    medidaCautelar: null,
+    trabaAfectiva: null,
+    vtoMedidaCautelar: null,
+    vtoTrabaAfectiva: null,
+    jurisdiccion: null,
+    materia: null,
+    id: cliente
+
+  })
+  const [error, setError] = useState({
+
     medidaCautelar: "",
     trabaAfectiva: "",
     vtoMedidaCautelar: "",
     vtoTrabaAfectiva: "",
-    jurisdiccion: "",
-  });
+    detalle: "",
+    materia: ""
 
-  const [errors, setErrors] = useState({});
+  })
 
-  /* Dispatch______________________ */
-  const dispatch = useDispatch();
-
-  /* Efectos Secundarios_______________________ */
-
-  /* Handlers______________________ */
-
-  const handleInput = (e) => {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
-
-    setErrors(
-      validate({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
-    );
-  };
-
-  const handlerEstado = ({ target }) => {
-    setInput({
-      ...input,
-      estado: target.value,
-    });
-
-    setErrors(
-      validate({
-        ...input,
-        estado: target.value,
-      })
-    );
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setErrors(
-      validate({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
-    );
-    if (
-      input.juez &&
-      input.numeroExpediente &&
-      input.juzgado &&
-      input.detalle &&
-      input.estado &&
-      input.eMail &&
-      input.medidaCautelar &&
-      input.trabaAfectiva &&
-      input.vtoMedidaCautelar &&
-      input.vtoTrabaAfectiva &&
-      input.jurisdiccion
-    ) {
-      dispatch(postCasos(input));
-      alert("Creación de datos exitosa");
+  const handleSubmit = function (e) {
+    e.preventDefault()
+    if (!input.detalle || input.estado === "Seleccione un estado" || input.materia === "Seleccione una materia") {
+      setError({ error, detalle: "debe dar un detalle" })
+      toast.error('No se pudo crear el caso!');
     } else {
-      alert("Se requieren todos los datos completados");
+      dispatch(postCasos(input))
+      toast.success('Caso Subido!');
+      setInput({
+        detalle: null,
+        estado: null,
+        juez: null,
+        juzgado: null,
+        numeroExpediente: null,
+        medidaCautelar: null,
+        trabaAfectiva: null,
+        vtoMedidaCautelar: null,
+        vtoTrabaAfectiva: null,
+        jurisdiccion: null,
+        materia: null,
+        id: cliente
+      })
     }
-    setInput({
-      juez: "",
+  }
+  const validate = function (name, value) {
+    if (name === "detalle") {
+      if (value === "" || !value)
+        setError({ ...error, vtoTrabaAfectiva: "Debe dar un detalle" })
+    }
+    if (name === "trabaAfectiva") {
+      console.log(input.trabaAfectiva, value)
+      if (value && !input.vtoTrabaAfectiva) {
+        setError({ ...error, vtoTrabaAfectiva: "debe ingresar una fecha o seleccionar 'no'" })
+      }
+      if (!value && input.vtoTrabaAfectiva) {
+        console.log("vtoTrabaAfectiva y no trabaAfectiva")
+        setError({ ...error, trabaAfectiva: "si desea ingresar una fecha de trava afectiva debe marcar 'si'" })
+      }
+      if (value && input.vtoTrabaAfectiva) {
+        setError({ ...error, vtoTrabaAfectiva: "", trabaAfectiva: "" })
+      }
+      if (!value && !input.vtoTrabaAfectiva) {
+        setError({ ...error, vtoTrabaAfectiva: "", trabaAfectiva: "" })
+      }
+    } else if (name === "medidaCautelar") {
+      if (value && !input.vtoMedidaCautelar)
+        setError({ ...error, vtoMedidaCautelar: "debe ingresar una fecha" })
+      if (!value && input.vtoMedidaCautelar)
+        setError({ ...error, vtoMedidaCautelar: "debe borrar la fecha" })
+      if (value && input.vtoMedidaCautelar) {
+        setError({ ...error, vtoMedidaCautelar: "", medidaCautelar: "" })
+      }
+      if (!value && !input.vtoMedidaCautelar) {
+        setError({ ...error, vtoMedidaCautelar: "", medidaCautelar: "" })
+      }
 
-      numeroExpediente: "",
-      juzgado: "",
-      detalle: "",
-      estado: "",
-      eMail: "",
-      medidaCautelar: "",
-      trabaAfectiva: "",
-      vtoMedidaCautelar: "",
-      vtoTrabaAfectiva: "",
-      jurisdiccion: "",
-    });
-  };
 
+    }
+    else if (name === "vtoMedidaCautelar") {
+      if (input.medidaCautelar && !value) {
+        setError({ ...error, medidaCautelar: "si desea eliminar la fecha de medida cautelar debe marcar 'no' " })
+      }
+      if (!input.medidaCautelar && value) {
+        setError({ ...error, medidaCautelar: "debe ingresar seleccionar 'si'" })
+      }
+      if (input.medidaCautelar && value) {
+        setError({ ...error, vtoMedidaCautelar: "", medidaCautelar: "" })
+      }
+      if (!input.medidaCautelar && !value) {
+        setError({ ...error, vtoMedidaCautelar: "", medidaCautelar: "" })
+      }
+    } else if (name === "vtoTrabaAfectiva") {
+      if (input.trabaAfectiva && !value) {
+        setError({ ...error, trabaAfectiva: "si desea eliminar la fecha de medida cautelar debe marcar 'no' " })
+      }
+      if (!input.trabaAfectiva && value) {
+        setError({ ...error, trabaAfectiva: "debe ingresar seleccionar 'si'" })
+      }
+      if (input.trabaAfectiva && value) {
+        setError({ ...error, vtoTrabaAfectiva: "", trabaAfectiva: "" })
+      }
+      if (!input.trabaAfectiva && !value) {
+        setError({ ...error, vtoTrabaAfectiva: "", trabaAfectiva: "" })
+      }
+    }
+  }
+  const handleChange = function (e) {
+    e.preventDefault()
+    if (e.target.name === "vtoMedidaCautelar" || e.target.name === "vtoTrabaAfectiva") {
+      setInput({ ...input, [e.target.name]: e.target.value })
+      validate(e.target.name, e.target.value)
+    } else {
+      setInput({ ...input, [e.target.name]: e.target.value === "si" ? true : false })
+      validate(e.target.name, e.target.value === "si" ? true : false)
+    }
+  }
+  console.log(input)
   return (
-    <div className="">
-      <Navbar navId={"menu"}/>
-      <div className="">
-        <div>
-          <form onSubmit={handleSubmit}>
-            <div className="">
-              <label htmlFor="Nombre">Juez:</label>
-              <div className="Input_form">
-                <InputGlobal
-                  type="text"
-                  placeholder="Juez"
-                  name="juez"
-                  value={input.juez}
-                  handleInput={handleInput}
-                />
-              </div>
-              {errors.juez && <p className="errors">{errors.juez}</p>}
-            </div>
+    <div className="container">
+      <div className="accordion accordion-flush ancho" id="accordionFlushExample">
+        <div className="accordion-item">
+          <h2 className="accordion-header" id={"a" + cliente}>
+            <button
+              className="accordion-button collapsed mb-3"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target={"#e" + cliente}
+              aria-expanded="false"
+              aria-controls={"e" + { cliente }}
+            >
+              <b>Crear Caso</b>
+            </button>
+          </h2>
 
-            {/* <div>
-              <label htmlFor="Nombre">Numero de Liquidacion:</label>
-              <div className="Input_form">
-                <InputGlobal
-                  type="text"
-                  placeholder="Numero de iquidacion"
-                  name="numeroLiquidacion"
-                  value={input.numeroLiquidacion}
-                  handleInput={handleInput}
-                />
-              </div>
-              {errors.numeroLiquidacion && (
-                <p className="errors">{errors.numeroLiquidacion}</p>
-              )}
-            </div> */}
+          <div id={'e' + cliente} className="accordion-collapse collapse" aria-labelledby={'a' + cliente} data-bs-parent="#accordionFlushExample">
+            <form className="list-group mb-3" onSubmit={handleSubmit}>
+              <li>Juez:<input className="list-group-item w-25 " value={input.juez} onChange={e => setInput({ ...input, juez: e.target.value })} /></li>
 
-            <div>
-              <label>Número de Expediente:</label>
-              <div className="Input_form">
-                <InputGlobal
-                  type="text"
-                  placeholder="Número de Expediente"
-                  name="numeroExpediente"
-                  value={input.numeroExpediente}
-                  handleInput={handleInput}
-                />
-              </div>
-              {errors.numeroExpediente && (
-                <p className="errors">{errors.numeroExpediente}</p>
-              )}
-            </div>
+              <li>Estado:<br />
+                <select defaultValue={input.estado} className="custom-select form-select custom-select-lg mb-3 w-25" onChange={e => setInput({ ...input, estado: e.target.value })}>
+                  <option value={null}>Seleccione un estado</option>
+                  <option value={"inicio"} >inicio</option>
+                  <option value={"prueba"}>prueba</option>
+                  <option value={"sentencia"}>sentencia</option>
+                </select>
+              </li>
 
-            <div>
-              <label>Juzgado:</label>
-              <div className="Input_form">
-                <InputGlobal
-                  type="text"
-                  placeholder="Juzgado"
-                  name="juzgado"
-                  value={input.juzgado}
-                  handleInput={handleInput}
-                />
-              </div>
+              <li>Juzgado:<input type="number" className="list-group-item w-25" value={input.juzgado} onChange={e => setInput({ ...input, juzgado: e.target.value })} /></li>
+              Detalles:<input className="list-group-item w-100 w-25" value={input.detalle} onChange={e => setInput({ ...input, detalle: e.target.value })} />
+              <p className="text-danger"> {error.detalle}</p>
+              <li>N° Expediente:<input type={"number"} className="list-group-item w-25" value={input.numeroExpediente} onChange={e => setInput({ ...input, numeroExpediente: e.target.value })} /></li>
+              {/* <li>N° Liquidacion:<input className="list-group-item w-25" value={input.numeroLiquidacion} disabled onChange={e => setInput({ ...input, numeroLiquidacion: e.target.value })} /></li> */}
+              <li>Medida Cautelar: <br />
+                <select name="medidaCautelar" className="custom-select form-select custom-select-lg mb-3 w-25" onChange={e => handleChange(e)}>
+                  <option value="no">no</option>
+                  <option value="si" >si</option>
+                </select>
+              </li>
+              <p className="text-danger">{error.medidaCautelar}</p>
+              <li>Vencimiento Medida Cautelar:<input className="list-group-item w-25" type={"date"} value={input.vtoMedidaCautelar} name={"vtoMedidaCautelar"} onChange={e => handleChange(e)} /></li>
+              <p className="text-danger">{error.vtoMedidaCautelar}</p>
+              <li><label >Traba Afectiva:</label> <br />
+                <select name="trabaAfectiva" className="custom-select form-select custom-select-lg mb-3 w-25" onChange={e => handleChange(e)}>
+                  <option value="no">no</option>
+                  <option value="si" >si</option>
+                </select></li>
+              <p className="text-danger">{error.trabaAfectiva}</p>
+              <li>Vencimiento Traba Afectiva:<input placeholder="2000-12-30" type={"date"} className={"list-group-item w-25"} value={input.vtoTrabaAfectiva} name={"vtoTrabaAfectiva"} onChange={e => handleChange(e)} /></li>
+              <p className="text-danger">{error.vtoTrabaAfectiva}</p>
+              <li>jurisdiccion:<input type={"text"} className="list-group-item w-25" value={input.jurisdiccion} onChange={e => setInput({ ...input, jurisdiccion: e.target.value })} /></li>
+              {
+                <li>Materia:<br />
+                  <select className="custom-select form-select custom-select-lg mb-3 w-25" onChange={e => setInput({ ...input, materia: e.target.value })}>
+                    <option value={null}>Seleccione una materia</option>
+                    {
+                      materias.map(e => (<option value={e.nombre}>{e.nombre}</option>))
 
-              {errors.juzgado && <p className="errors">{errors.juzgado}</p>}
-            </div>
+                    }
+                  </select>
+                </li>
+              }
+              <p className="text-danger">{error.materia}</p>
+              {
+                error.medidaCautelar !== "" || error.trabaAfectiva !== "" || error.vtoMedidaCautelar !== "" || error.vtoTrabaAfectiva !== "" || !input.detalle || !input.materia === "Seleccione una materia" || !input.estado === "Seleccione un estado" ?
+                  <div className="d-flex justify-content-center">
+                    <button className="btn btn-primary d-flex justify-content-center mt-3 mb-3" type="submit" disabled>guardar</button>
 
-            <div>
-              <label>Detalle del Caso:</label>
-              <div className="Input_form">
-                <TextTarea
-                  type="text"
-                  placeholder="Detalle del Caso"
-                  name="detalle"
-                  value={input.detalle}
-                  handleInput={handleInput}
-                />
-              </div>
-              {errors.detalle && <p className="errors">{errors.detalle}</p>}
-            </div>
+                  </div> :
+                  <div className="d-flex justify-content-center">
+                    <button className="btn btn-primary d-flex justify-content-center mt-3 mb-3" type="submit" >guardar</button>
 
-            <div>
-              <label>Estado del Caso:</label>
-              <div className="Input_form">
-                <EstadoSelect handlerEstado={handlerEstado} />
-              </div>
-              {errors.estado && <p className="errors">{errors.estado}</p>}
-            </div>
-
-            <div>
-              <label>Email:</label>
-              <div className="Input_form">
-                <InputGlobal
-                  type="email"
-                  placeholder="Email"
-                  name="eMail"
-                  value={input.eMail}
-                  handleInput={handleInput}
-                />
-              </div>
-              {errors.eMail && <p className="errors">{errors.eMail}</p>}
-            </div>
-
-            <div>
-              <label>Medida Cautelar:</label>
-              <div className="Input_form">
-                <InputGlobal
-                  type="text"
-                  placeholder="Medida Cautelar"
-                  name="medidaCautelar"
-                  value={input.medidaCautelar}
-                  handleInput={handleInput}
-                />
-              </div>
-              {errors.medidaCautelar && (
-                <p className="errors">{errors.medidaCautelar}</p>
-              )}
-            </div>
-
-            <div>
-              <label>Traba Afectiva:</label>
-              <div className="Input_form">
-                <InputGlobal
-                  type="text"
-                  placeholder="Traba afectiva"
-                  name="trabaAfectiva"
-                  value={input.trabaAfectiva}
-                  handleInput={handleInput}
-                />
-              </div>
-              {errors.trabaAfectiva && (
-                <p className="errors">{errors.trabaAfectiva}</p>
-              )}
-            </div>
-
-            <div>
-              <label>VTO Medida Cautelar:</label>
-              <div className="Input_form">
-                <InputGlobal
-                  type="date"
-                  name="vtoMedidaCautelar"
-                  value={input.vtoMedidaCautelar}
-                  handleInput={handleInput}
-                />
-              </div>
-              {errors.vtoMedidaCautelar && (
-                <p className="errors">{errors.vtoMedidaCautelar}</p>
-              )}
-            </div>
-
-            <div>
-              <label>VTO Traba Afectiva:</label>
-              <div className="Input_form">
-                <InputGlobal
-                  type="date"
-                  name="vtoTrabaAfectiva"
-                  value={input.vtoTrabaAfectiva}
-                  handleInput={handleInput}
-                />
-              </div>
-              {errors.vtoTrabaAfectiva && (
-                <p className="errors">{errors.vtoTrabaAfectiva}</p>
-              )}
-            </div>
-
-            <div>
-              <label>Jurisdiccion:</label>
-              <div className="Input_form">
-                <InputGlobal
-                  type="text"
-                  placeholder="Jurisdiccion"
-                  name="jurisdiccion"
-                  value={input.jurisdiccion}
-                  handleInput={handleInput}
-                />
-              </div>
-              {errors.jurisdiccion && (
-                <p className="errors">{errors.jurisdiccion}</p>
-              )}
-            </div>
-
-            <div className="Button_form">
-              <ButtonSubmit type={"submit"} text={"Crear Caso"} />
-            </div>
-          </form>
+                  </div>
+              }
+            </form>
+          </div>
         </div>
       </div>
     </div>

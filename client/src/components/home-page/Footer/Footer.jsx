@@ -4,7 +4,7 @@ import Logo from "../assets/img/logo-blacno-sin-fondo.png";
 import { Facebook, Instagram } from "../assets/svg";
 import "./Footer.css";
 
-const Footer = () => {
+const Footer = ({ direccion, contacto }) => {
   return (
     <div className="footer_container">
       <div className="footer">
@@ -33,19 +33,13 @@ const Footer = () => {
           <div>
             <h5>Contacto</h5>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
-              fugit, odio repellendus culpa et magnam laudantium iste possimus
-              quia consectetur enim delectus voluptate aliquid, animi doloremque
-              nam, aut ratione modi.
+              {contacto ? contacto : "actualmente no tenemos"}
             </p>
           </div>
           <div>
             <h5>Dirección</h5>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
-              fugit, odio repellendus culpa et magnam laudantium iste possimus
-              quia consectetur enim delectus voluptate aliquid, animi doloremque
-              nam, aut ratione modi.
+              {direccion ? direccion : "actualmente no tenemos"}
             </p>
           </div>
         </div>

@@ -21,21 +21,22 @@ import HomeAbogado from "./components/home-Abogado/HomeAbogado";
 import NavAbogado from "./components/home-Abogado/NavAbogado/NavAbogado";
 import Footer from "./components/home-Abogado/Footer/Footer";
 import Signin from "./components/Sign/singnin";
-import Signup from "./components/Sign/signup";
-import Loaded from "./components/Loaded/Loaded";
 import FormCasos from "./components/FormCasos/FormCasos";
 import HomeUsuario from "./components/homeUsuario/HomeUsuario";
 import ConsultasUsuario from "./components/homeUsuario/consultasUsuario/ConsultasUsuario";
+import TurnosUsuarios from "./components/homeUsuario/turnosUsuario/TurnosUsuario";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminPage from "./components/admin/adminPage/adminPage";
 import TurnosAbogado from "./components/home-Abogado/turnos/TurnosAbogado";
 import "./App.css";
-import TurnosUsuario from "./components/homeUsuario/turnosUsuario/TurnosUsuario";
-
-import SiteMateria from "./components/Materia/SiteMaterias/SiteMaterias";
+import SiteMateria from "./components/Materia/SiteMaterias/SiteMaterias"
 import Clients from "./components/home-Abogado/clients/clients";
-import { NewPass } from "./components/Sign/newpass";
+import NewPass from "./components/Sign/newpass.js";
+import Signup from "./components/Sign/signup";
+import ErrorPag from "./components/Error404/ErrorPag";
+
+
 function App() {
   const dispatch = useDispatch();
   const { usuario } = useSelector((state) => state);
@@ -61,7 +62,6 @@ function App() {
   return (
     <div className="App container-fluid p-0">
       <Switch>
-      <Suspense fallback={Loaded}>
         <Route exact path="/">
           <HomePage />
         </Route>
@@ -77,106 +77,90 @@ function App() {
         <Route exact path="/abogados">
           <Perfiles />
         </Route>
-        <Route
-          exact
-          path={usuario?.adminId != null ? "/admin" : "/ingreso"}
-          component={usuario?.adminId != null ? AdminPage : Signin}
-        ></Route>
-
         <Route exact path="/ingreso" component={Signin} />
         <Route exact path="/cita" component={FormCita} />
-        <Route exact path="/signup" component={Signup} />
         <Route exact path="/Cambiopass" component={NewPass} />
-        <Route
-          exact
-          path={
-            usuario && usuario?.adminId === null ? "/user/panel" : "/ingreso"
-          }
-        >
-          {usuario && usuario?.adminId === null ? <HomeUsuario /> : <Signin />}
+
+        <Route exact path="/user/panel">
+          <HomeUsuario />
         </Route>
         <Route
           exact
-          path={
-            usuario?.clienteId != null ? "/user/panel/consultas" : "/ingreso"
-          }
+          path={usuario?.clienteId != null ? "/user/panel/turnos" : "/"}
         >
-          {usuario?.clienteId != null ? <ConsultasUsuario /> : <Signin />}
+          {usuario?.clienteId != null ? <TurnosUsuarios/>: <ErrorPag/>}
         </Route>
         <Route
-          exact
-          path={usuario?.clienteId != null ? "/user/panel/turnos" : "/ingreso"}
-        >
-          {usuario?.clienteId != null ? <TurnosUsuario /> : <Signin />}
-        </Route>
-        <Route component={Loaded} path="/:rest*" />
-        </Suspense>
+          path={usuario?.adminId != null ? "/admin" : "/"}
+          component={usuario?.adminId != null ? AdminPage : ErrorPag}
+        ></Route>
+        <Route component={ErrorPag} path="/:rest*" />
         <div>
           <NavAbogado />
           <Route
             exact
-            path={usuario?.abogadoId != null ? "/user/abogado" : "/ingreso"}
+            path={usuario?.abogadoId != null ? "/user/abogado" : "/"}
           >
-            {usuario?.abogadoId != null ? <HomeAbogado /> : <Signin />}
+            {usuario?.abogadoId != null ? <HomeAbogado /> : <ErrorPag />}
           </Route>
           <Route
             exact
             path={
-              usuario?.abogadoId != null ? "/user/abogado/clientes" : "/ingreso"
+              usuario?.abogadoId != null ? "/user/abogado/clientes" : "/"
             }
           >
-            {usuario?.abogadoId != null ? <Clients /> : <Signin />}
+            {usuario?.abogadoId != null ? <Clients /> : <ErrorPag />}
           </Route>
           <Route
             exact
             path={
               usuario?.abogadoId != null
                 ? "/user/abogado/consultas"
-                : "/ingreso"
+                : "/"
             }
           >
             {usuario?.abogadoId != null ? (
               <VistaConsultasAbogado />
             ) : (
-              <Signin />
+              <ErrorPag/>
             )}
           </Route>
           <Route
             exact
             path={
-              usuario?.abogadoId != null ? "/user/abogado/casos" : "/ingreso"
+              usuario?.abogadoId != null ? "/user/abogado/casos" : "/"
             }
           >
-            {usuario?.abogadoId != null ? <Clientes /> : <Signin />}
+            {usuario?.abogadoId != null ? <Clientes /> : <ErrorPag/>}
           </Route>
           <Route
             exact
             path={
               usuario?.abogadoId != null
                 ? "/user/abogado/modificar-perfil"
-                : "/ingreso"
+                : "/"
             }
-            component={usuario?.abogadoId != null ? ModificarAbogado : Signin}
+            component={usuario?.abogadoId != null ? ModificarAbogado : ErrorPag}
           ></Route>
           <Route
             exact
             path={
               usuario?.abogadoId != null
                 ? "/user/abogado/gestionar-turnos"
-                : "/ingreso"
+                : "/"
             }
           >
-            {usuario?.abogadoId != null ? <TurnosAbogado /> : <Signin />}
+            {usuario?.abogadoId != null ? <TurnosAbogado /> : <ErrorPag />}
           </Route>
           <Route
             exact
             path={
               usuario?.abogadoId != null
                 ? "/user/abogado/nuevo-caso"
-                : "/ingreso"
+                : "/"
             }
           >
-            {usuario?.abogadoId != null ? <FormCasos /> : <Signin />}
+            {usuario?.abogadoId != null ? <FormCasos /> : <ErrorPag />}
           </Route>
           <Footer />
         </div>

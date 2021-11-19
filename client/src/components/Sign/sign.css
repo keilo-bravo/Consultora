@@ -1,15 +1,219 @@
-.body_login {
-    /* position: absolute;
+/* NavBar  */
+.divButton {
+    display         : flex;
+    justify-content : space-around;
+    background-color: #033663;
+    padding         : 12px 12px;
+}
+
+.divButton,
+.divButton button {
+    color: #fff;
+}
+
+.divButton div {
+    position       : relative;
+    display        : flex;
+    justify-content: flex-end;
+    align-items    : center;
+    object-fit     : contain;
+    width          : 40%;
+}
+
+.divButton img {
+    position  : relative;
+    left      : -18%;
+    display   : inline-block;
+    object-fit: cover;
+    width     : 7%;
+    height    : 40px;
+}
+
+.divButton p {
+    position      : absolute;
+    right         : 12%;
+    bottom        : -37%;
+    display       : inline-block;
+    text-transform: capitalize;
+    font-size     : 25px;
+}
+
+.buttonBack_login {
+    transition: all .4s ease-in-out;
+}
+
+.buttonBack_login:hover {
+    color: rgb(158, 157, 157);
+}
+
+
+/* Displayname */
+.body_displayname {
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    min-height     : 90vh;
+}
+
+.bg_blue_image_displayname {
+    background-color: #fff;
+    box-shadow      : 0 14px 28px rgba(0, 0, 0, 0.25),
+        0 10px 10px rgba(0, 0, 0, 0.22);
+    position  : relative;
+    overflow  : hidden;
+    width     : 968px;
+    max-width : 100%;
+    min-height: 480px;
+}
+
+.overlay_displayname {
+    position: absolute;
+}
+
+.overlay_right_displayname {
+    background-color: #033663;
+    position        : absolute;
+    right           : 0;
+    height          : 100%;
+    width           : 50%;
+}
+
+.overlay_right_displayname div {
+    width          : 90%;
+    height         : 100%;
+    display        : flex;
+    flex-direction : column;
+    justify-content: center;
+    align-items    : center;
+    transform      : translateY(-10%);
+    margin         : auto;
+    color          : #fff;
+}
+
+.overlay_right_displayname img {
+    display: block;
+    width  : 50%;
+}
+
+.overlay_right_displayname h4 {
+    max-width     : 90%;
+    font-size     : 16px;
+    letter-spacing: 1px;
+    text-align    : center;
+}
+
+.overlay_right_displayname a {
+    position  : relative;
+    display   : block;
+    text-align: center;
+    width     : 50%;
+    padding   : 5px;
+    border    : solid 1px #fff !important;
+    color     : #fff;
+    z-index   : 1;
+    transition: all .4s ease-in-out;
+}
+
+.overlay_right_displayname a:hover {
+    border: solid 1px #fff !important;
+    color : #033663;
+}
+
+.overlay_right_displayname a::before {
+    content         : "";
+    position        : absolute;
+    left            : 0;
+    bottom          : 0;
+    width           : 100%;
+    height          : 100%;
+    transform-origin: left 0;
+    transform       : scaleX(0);
+    background-color: #fff;
+    border          : solid 1px #fff;
+    transition      : all .4s ease-in-out;
+    z-index         : -1;
+}
+
+.overlay_right_displayname a:hover::before {
+    transform: scaleX(1);
+}
+
+
+.registerEmail_in_container {
+    left   : 0;
+    width  : 50%;
+    z-index: 2;
+}
+
+.registerEmail_in_container div {
+    background-color: #fff;
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+    flex-direction  : column;
+    text-align      : center;
+}
+
+.registerEmail_in_container div.registerEmail h3 {
+    transform: translateY(-50%);
+}
+
+.registerEmail_in_container div.registerEmail {
+    margin   : auto;
+    transform: translateY(10%);
+    width    : 80%;
+}
+
+.registerEmail .divButton_register_email {
     width: 100%;
-    height: 100%; */
-    background        : #fff;
-    display           : flex;
-    justify-content   : center;
-    align-items       : center;
-    flex-direction    : column;
-    /* font-family    : 'Montserrat', sans-serif; */
-    min-height        : 100vh;
-    /* margin         : -20px 0 50px; */
+}
+
+.registerEmail button {
+    /* background-color: #033663; */
+    border: #033663 solid 1px !important;
+    display         : block;
+    text-transform  : uppercase;
+    padding         : 7px;
+    width           : 100%;
+    color           : #033663;
+    transition      : all .4s ease-in-out;
+}
+
+.registerEmail button:hover {
+    background-color: #033663;
+    color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Formulario de registro */
+.body_login {
+    background     : #fff;
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    flex-direction : column;
+    min-height     : 100vh;
+}
+
+.bg_blue_image {
+    background-color: #fff;
+    box-shadow      : 0 14px 28px rgba(0, 0, 0, 0.25),
+        0 10px 10px rgba(0, 0, 0, 0.22);
+    position  : relative;
+    overflow  : hidden;
+    width     : 968px;
+    max-width : 100%;
+    min-height: 480px;
 }
 
 .bg_blue_image button {
@@ -57,17 +261,6 @@
     border    : none;
 }
 
-.bg_blue_image {
-    background-color   : #fff;
-    /* border-radius   : 10px; */
-    box-shadow         : 0 14px 28px rgba(0, 0, 0, 0.25),
-        0 10px 10px rgba(0, 0, 0, 0.22);
-    position  : relative;
-    overflow  : hidden;
-    width     : 968px;
-    max-width : 100%;
-    min-height: 480px;
-}
 
 .form_container {
     position  : absolute;
@@ -82,8 +275,6 @@
     align-items     : center;
     justify-content : center;
     flex-direction  : column;
-    /* padding      : 0 50px; */
-    /* height       : 100%; */
     text-align      : center;
 }
 
@@ -178,6 +369,42 @@
     background-color: #033663;
 }
 
+.form_container div.div_sign_in_container .forgot_login {
+    margin-top: 10px;
+}
+
+.form_container div.div_sign_in_container .forgot_login a,
+.form_container div.div_sign_in_container .forgot_login p {
+    display      : inline-block;
+    font-size    : 13px;
+    margin-bottom: 0px;
+}
+
+.form_container div.div_sign_in_container .forgot_login a {
+    position        : relative;
+    color           : #fff;
+    text-transform  : capitalize;
+    background-color: #033663;
+    padding         : 3px 6px;
+    border          : solid 1px transparent;
+    transition      : all .4s ease-in-out;
+}
+
+.form_container div.div_sign_in_container .forgot_login a:hover {
+    color           : #033663;
+    text-transform  : capitalize;
+    background-color: transparent;
+    border          : solid 1px #033663;
+    /* z-index      : 10; */
+    /* transform    : translateZ(0); */
+}
+
+.form_container div.div_sign_in_container .forgot_login a:active {
+    transform: scale(.80);
+}
+
+
+
 
 
 .sign_in_container {
@@ -190,6 +417,8 @@
     transform: translateX(100%);
     opacity  : 0;
 }
+
+
 
 
 .sign_up_container {
@@ -283,6 +512,7 @@ si esto no se mueve solo s mueve el texto */
 .bg_blue_image.right-panel-active .overlay_left {
     transform: translateX(0);
 }
+
 .overlay_left div {
     width: 80%;
 }

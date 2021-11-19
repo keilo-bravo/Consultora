@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#fondo1{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background: url(./img/background404-1.jpg);
+    background-size: cover;
+    background-position: center;
+}
+#fondo2{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background: url(./img/background404-2.jpg);
+    background-size: cover;
+    background-position: center;
+}
+#fondo3{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background: url(./img/background404-3.jpg);
+    background-size: cover;
+    background-position: center;
+}

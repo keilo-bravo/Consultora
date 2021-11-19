@@ -72,3 +72,22 @@ export const sessionERR = () => {
         button: "Aceptar"
     })
 }
+
+export const correoNo = () => {
+    swal({
+        title: "Ups.. No se pudo encontrar el usuario",
+        text: '',
+        icon: "error",
+        button: "Aceptar"
+    })
+}
+
+export const linkOK = () => {
+    swal({
+        title: "Solicitud aceptada",
+        text: 'Por favor verificar su bandeja de correo',
+        icon: "success",
+        button: "Aceptar"
+    })
+
+}

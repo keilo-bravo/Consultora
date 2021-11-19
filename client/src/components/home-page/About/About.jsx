@@ -9,7 +9,7 @@ const About = ({
   contenidoFilosofia,
 }) => {
   return (
-    <div className="hidden_contenedor">
+    <div id="about" className="hidden_contenedor">
       <div className="contenedor_about">
         <div className="About_container">
           <div className="row col-md-12 row-cols-md-6 justify-content-evenly">

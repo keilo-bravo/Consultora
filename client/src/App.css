@@ -15,9 +15,7 @@ a:link {
   border    : none;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+
 
 body {
   width: 100%;
@@ -27,6 +25,32 @@ button {
   border    : none;
   background: none;
   cursor    : pointer;
+}
+
+ input[type='text'],
+ input[type='password'],
+ input[type='type'] {
+    width        : 100%;
+    outline      : 0;
+    border       : 0 !important;
+    margin-bottom: 9px;
+    background   : none;
+    color        : #033663;
+    font-size    : 15px;
+    font-family  : sans-serif;
+}
+
+ input[type='text']:focus,
+ input[type='password']:focus,
+ input[type='type']:focus,
+ input[type='text']:link,
+ input[type='password']:link,
+ input[type='type']:link,
+ input[type='text']:visited,
+ input[type='type']:visited,
+ input[type='password']:visited {
+    box-shadow: none !important;
+    border    : none;
 }
 
 

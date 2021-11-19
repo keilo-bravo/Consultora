@@ -33,7 +33,7 @@ const HomePage = () => {
           about.nuestraFilosofia
         }
       />
-      <div className="mb-5">
+      <div id="materias" className="mb-5">
         <h3 className="text-center mb-4 fs-1">Competencias</h3>
         <div className="flex-materias">
           {materias?.map((m, i) => (

@@ -54,7 +54,7 @@ const SiteMaterias = () => {
                         <SiteMateria
                           firstName={a.firstName}
                           lastName={a.lastName}
-                          img={a.abogado.imagen}
+                          img={a.abogado.imagen || "https://www.caracteristicas.co/wp-content/uploads/2017/03/Derecho-e1564875517201.jpg"}
                           abogado={abogados}
                         />
                       </Link>
@@ -136,7 +136,7 @@ const SiteMaterias = () => {
                         <SiteMateria
                           firstName={a.firstName}
                           lastName={a.lastName}
-                          img={a.abogado.imagen}
+                          img={a.abogado.imagen || "https://www.caracteristicas.co/wp-content/uploads/2017/03/Derecho-e1564875517201.jpg"}
                           abogado={abogados}
                         />
                       </Link>
@@ -218,7 +218,7 @@ const SiteMaterias = () => {
                         <SiteMateria
                           firstName={a.firstName}
                           lastName={a.lastName}
-                          img={a.abogado.imagen}
+                          img={a.abogado.imagen || "https://www.caracteristicas.co/wp-content/uploads/2017/03/Derecho-e1564875517201.jpg"}
                           abogado={abogados}
                         />
                       </Link>
@@ -300,7 +300,7 @@ const SiteMaterias = () => {
                         <SiteMateria
                           firstName={a.firstName}
                           lastName={a.lastName}
-                          img={a.abogado.imagen}
+                          img={a.abogado.imagen || "https://www.caracteristicas.co/wp-content/uploads/2017/03/Derecho-e1564875517201.jpg"}
                           abogado={abogados}
                         />
                       </Link>
@@ -382,7 +382,7 @@ const SiteMaterias = () => {
                         <SiteMateria
                           firstName={a.firstName}
                           lastName={a.lastName}
-                          img={a.abogado.imagen}
+                          img={a.abogado.imagen || "https://www.caracteristicas.co/wp-content/uploads/2017/03/Derecho-e1564875517201.jpg"}
                           abogado={abogados}
                         />
                       </Link>
@@ -464,7 +464,7 @@ const SiteMaterias = () => {
                         <SiteMateria
                           firstName={a.firstName}
                           lastName={a.lastName}
-                          img={a.abogado.imagen}
+                          img={a.abogado.imagen || "https://www.caracteristicas.co/wp-content/uploads/2017/03/Derecho-e1564875517201.jpg"}
                           abogado={abogados}
                         />
                       </Link>
@@ -546,7 +546,7 @@ const SiteMaterias = () => {
                         <SiteMateria
                           firstName={a.firstName}
                           lastName={a.lastName}
-                          img={a.abogado.imagen}
+                          img={a.abogado.imagen || "https://www.caracteristicas.co/wp-content/uploads/2017/03/Derecho-e1564875517201.jpg"}
                           abogado={abogados}
                         />
                       </Link>
@@ -628,7 +628,7 @@ const SiteMaterias = () => {
                         <SiteMateria
                           firstName={a.firstName}
                           lastName={a.lastName}
-                          img={a.abogado.imagen}
+                          img={a.abogado.imagen || "https://www.caracteristicas.co/wp-content/uploads/2017/03/Derecho-e1564875517201.jpg"}
                           abogado={abogados}
                         />
                       </Link>
@@ -709,7 +709,7 @@ const SiteMaterias = () => {
                         <SiteMateria
                           firstName={a.firstName}
                           lastName={a.lastName}
-                          img={a.abogado.imagen}
+                          img={a.abogado.imagen || "https://www.caracteristicas.co/wp-content/uploads/2017/03/Derecho-e1564875517201.jpg"}
                           abogado={abogados}
                         />
                       </Link>

@@ -45,6 +45,8 @@ export default function ModificarAbogado() {
   } = useSelector((state) => state);
   const dispatch = useDispatch();
 
+  console.log(materiasRedux)
+
   useEffect(() => {
     if (usuario?.slug?.length > 0) {
       let arrMaterias = [];

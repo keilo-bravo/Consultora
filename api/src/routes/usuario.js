@@ -39,8 +39,6 @@ router.post("/adm", (req, res) => post.setAdmin(req, res)); // set adm
 
 router.post("/usuario/abogado", (req, res) => post.setAbogado(req, res)); //set abogado
 
-router.post("/newpass", (req, res) => post.reiniciarPassword(req, res)) 
-
 // console.log(abogadoId, clienteId, '------------');
 
 router.put("/bann", put.setBann); //bannea usuario

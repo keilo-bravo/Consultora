@@ -118,7 +118,10 @@ async function getMaterias(req, res) {
     });
     if (materias.length === 0) {
       for (let i = 0; i < vec.length; i++) {
-        materias = await Materias.create({ nombre: vec[i] });
+        materias = await Materias.findOrCreate({
+          where: { nombre: vec[i] },
+          include: Abogado,
+        });
       }
     }
     return res.send(materias);
